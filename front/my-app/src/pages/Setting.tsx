@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './Header';
-import Menu from './Menu';
+import Header from '../Components/Header';
+import Menu from '../Components/Menu';
 
 export default function Setting() {
     return (

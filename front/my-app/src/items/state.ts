@@ -7,10 +7,10 @@ export interface Item {
     price: string,
     type: string,
     photo: string,
-    _id?: string
+    _id: string
 }
 
 export interface ItemState {
     loading: LoadingState;
-    Items: Item[];
+    items: Item[];
 }

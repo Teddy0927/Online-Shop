@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { loggedIn } from '../auth/action';
-import Header from './Header';
-import Menu from './Menu';
+import Header from '../Components/Header';
+import Menu from '../Components/Menu';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -11,6 +11,8 @@ export default function Login() {
     const dispatch = useDispatch();
     const [error, setError] = useState('');
     const navigate = useNavigate();
+
+    
 
     return (
         <div>

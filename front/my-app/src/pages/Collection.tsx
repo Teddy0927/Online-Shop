@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './Header';
-import Menu from './Menu';
+import Header from '../Components/Header';
+import Menu from '../Components/Menu';
 
 export default function Collection() {
     // const res = fetch(`${process.env.REACT_APP_BACKEND_URL}/item`)

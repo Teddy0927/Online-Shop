@@ -1,21 +1,19 @@
 import { LoadingState } from '../Components/model';
 import { ItemsActions } from './action';
-import { Item } from './state';
+import { ItemState } from './state';
 import produce from 'immer';
 
-export interface ItemState {
-    items: Item[],
-};
-
 const initialState: ItemState = {
+    loading: LoadingState.NotLoaded,
     items: [],
 }
 
 export const itemReducer = (state: ItemState = initialState, action: ItemsActions): ItemState => {
     switch (action.type) {
-        case '@@/item/LOADED_ONE_ITEM':
+        case '@@item/LOADED_ONE_ITEM':
         return produce(state, state => {
             const itemIndex = state.items.findIndex(item => item._id === action.item._id)
+            console.log('items reducer result: ', itemIndex)
             if (itemIndex === -1) {
                 state.items.push(action.item)
             } else {
@@ -28,12 +26,14 @@ export const itemReducer = (state: ItemState = initialState, action: ItemsAction
         case '@@item/LOADED_ITEMS':
             return {
                 ...state,
-                items: action.items
+                items: action.items,
+                loading: LoadingState.Loaded
             }
         case '@@item/LOADED_FRONT_ITEM':
             return {
                 ...state,
-                items: action.items
+                items: action.items,
+                loading: LoadingState.Loaded
             }
     }
 

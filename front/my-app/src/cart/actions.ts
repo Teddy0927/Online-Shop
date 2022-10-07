@@ -39,6 +39,7 @@ export function loadCart() {
 
 export function fetchAddToCart(item_id: string) {
     return async (dispatch: AppDispatch) => {
+        dispatch(addToCart(item_id))
         try {
             const res = await axios.post('/cart', {
                 item_id: item_id

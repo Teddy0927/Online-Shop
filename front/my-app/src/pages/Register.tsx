@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Header from './Header';
-import Menu from './Menu';
+import Header from '../Components/Header';
+import Menu from '../Components/Menu';
 
 export default function Register() {
 const { handleSubmit, register } = useForm();

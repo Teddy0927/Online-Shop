@@ -15,12 +15,12 @@ export function cartReducer(state: CartState = initialState, action: CartActions
                 ...state,
                 loading: LoadingState.Loaded,
                 item_ids: action.item_ids
-            };
+            }
         case '@@cart/ADD_TO_CART':
             return produce(state, state => {
                 state.item_ids.push(action.item_id)
                 state.item_ids.sort()
-            });
+            })
         case '@@cart/REMOVE_FROM_CART':
             return produce(state, state => {
                 const index = state.item_ids.indexOf(action.item_id)

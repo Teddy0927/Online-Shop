@@ -11,7 +11,7 @@ export function loadedItems(items: Item[]) {
 
 export function loadedOneItem(item: Item) {
     return {
-        type: '@@/item/LOADED_ONE_ITEM' as const,
+        type: '@@item/LOADED_ONE_ITEM' as const,
         item 
     }
 }
@@ -40,6 +40,7 @@ export function loadItems() {
 export function loadOneItem(item_id: string) {
     return async(dispatch: AppDispatch) => {
         const res = await axios.get(`/item/${item_id}`)
+        console.log('item loadOne action: ', res)
 
         if (res.data.length > 0){
             dispatch(loadedOneItem(res.data[0]))

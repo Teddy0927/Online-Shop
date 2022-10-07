@@ -1,13 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Login from './Components/Login';
-import Register from './Components/Register';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import './App.css';
-import Home from './Components/Home';
-import NotFound from './Components/NotFound';
-import Setting from './Components/Setting';
-import Collection from './Components/Collection';
-import Cart from './Components/Cart';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Setting from './pages/Setting';
+import Collection from './pages/Collection';
+import Cart from './pages/Cart';
+import Test from './pages/Test';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/setting' element={<Setting />}></Route>
         <Route path='/collection' element={<Collection />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
+        <Route path='/test' element={<Test />}></Route>
         <Route path='*' element={<NotFound />}></Route>
       </Routes>
     </div>

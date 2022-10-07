@@ -28,7 +28,7 @@ export class userController {
             }
 
             if (await checkPassword(password, user[0].password)) {
-                console.log('User: ', user[0].username, ' just logged in.');
+                console.log('User: ', user[0].username, ' just logged in. With ObjID: ', user[0]._id);
                 return res.json({id: user[0]._id, email: user[0].email, username: user[0].username, token: jwtSimple.encode({
                     userId: user[0]._id
                 }, '1234') });

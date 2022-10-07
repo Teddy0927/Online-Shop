@@ -63,10 +63,13 @@ export class itemController {
     getOneItem = async (req: Request, res: Response) => {
         try {
             const id = req.params.id;
-            const result = await (await this.dbConnection).collection('items').find({_id: {$eq: id}})
+            console.log('get one item: ', id);
+            const result = await (await this.dbConnection).collection('items').find(new ObjectId(id)).toArray();
+            // console.log('new stuff: ', new ObjectId(id));
     
             if (result) {
                 res.status(200).json(result);
+                console.log('result of find one item: ', result);
             } else {
                 res.json({ status: 'fail', result: ['Fail to get items'] })    
             }
