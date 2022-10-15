@@ -26,21 +26,24 @@ export const form = formidable({
 
 export const userMiddleware = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const token = permit.check(req)
-    console.log('token result: ', token)
+    // console.log("uM req: ", req)
+    console.log("uM token: ", token)
     try {
+        console.log('Enter jor uM try');
         const payload = jwtSimple.decode(token, process.env.JWT_SECRET!)
         req.user = {
             id: payload.userID
-        }
-        console.log('Enter jor uM try');
+        };
+        
         console.log('req.user try is: ', req.user);
         next();
     } catch (err) {
+        console.log('uM catch err', err)
+        console.log('Enter jor uM catch');
         const db = connectToDatabase();
         let username = v4();
         let password = "";
         const newUser = (await (await db).collection('users').insertOne({ username, password })).insertedId;
-        console.log('Enter jor uM catch');
         req.user = {
             id: newUser
         }

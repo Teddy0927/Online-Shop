@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import itemDemo from '../itemDemo2.png'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import logo from '../logoWG.png';
-import '@splidejs/splide/css/sea-green';
+import '@splidejs/splide/css';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { NavLink } from 'react-router-dom';
@@ -49,44 +49,44 @@ export default function Body() {
 
     // const loggedUsername = useSelector((state: RootState) => state.auth.username)
 
- 
 
-    async function typeOne(){
+
+    async function typeOne() {
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/collectionFront/1`);
         let response = await res.json();
 
         setBouquet(response);
     }
 
-    async function typeTwo(){
+    async function typeTwo() {
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/collectionFront/2`);
         let response = await res.json();
 
         setDome(response);
     }
 
-    async function typeThree(){
+    async function typeThree() {
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/collectionFront/3`);
         let response = await res.json();
 
         setBoxes(response);
     }
 
-    async function typeFour(){
+    async function typeFour() {
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/collectionFront/4`);
         let response = await res.json();
 
         setBluetooth(response);
     }
 
-    async function typeFive(){
+    async function typeFive() {
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/collectionFront/5`);
         let response = await res.json();
-   
+
         setFantasy(response);
     }
 
-    async function typeSix(){
+    async function typeSix() {
         const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/collectionFront/6`);
         let response = await res.json();
 
@@ -102,7 +102,7 @@ export default function Body() {
         typeFour()
         typeFive()
         typeSix()
-    },[])
+    }, [])
 
 
     const preservedFlowerBouquet = useRef(null);
@@ -190,7 +190,7 @@ export default function Body() {
                                 <h6 className="d-none d-md-block">Login</h6>
                             </NavLink>}
                         {isLoggedIn === true &&
-                            <NavLink className="col navLinkItem" to="/setting">
+                            <NavLink className="col navLinkItem" to="/user">
                                 <FontAwesomeIcon className="icons" icon={solid('user')} />
                                 <h6 className="d-none d-md-block">Hi </h6>
                                 {/* {loggedUsername} */}
@@ -239,7 +239,7 @@ export default function Body() {
                 </div>
             </div>
             <div>
-                <Splide className="slideShow" options={{ rewind: true, autoWidth: true, focus: 'center', }} aria-label="Slide show">
+                <Splide className="slideShow" options={{ type: 'loop', autoplay: true, interval: 5000,rewind: true, autoWidth: true, focus: 'center', arrows: false }} aria-label="Slide show">
                     <SplideSlide className="item">
                         <img className="item" src={require('../splide_img1.jpeg')} alt="Beautiful flower" />
                     </SplideSlide>
@@ -249,12 +249,15 @@ export default function Body() {
                     <SplideSlide className="item">
                         <img className="item" src={require('../splide_img3.jpeg')} alt="Angel flower" />
                     </SplideSlide>
+                    <div className="splide__progress">
+                        <div className="splide__progress__bar" />
+                    </div>
                 </Splide>
             </div>
             <div ref={preservedFlowerBouquet} key='PRESERVED FLOWER BOUQUET'>
-                <h2><span>PRESERVED FLOWER BOUQUET</span></h2>
-                <div className="container-fluid">
-                    <div className="row d-flex flex-wrap">
+                <h2><span>BOUQUET</span></h2>
+                <div className="container">
+                    <div className="row d-flex flex-wrap justify-content-around">
                         {
                             Bouquet.map((flower, index) => (
                                 <SellingItems item={flower} key={index} />
@@ -265,7 +268,7 @@ export default function Body() {
             </div>
             <div ref={glassDome} key='GLASS DOME'>
                 <h2><span>GLASS DOME</span></h2>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row d-flex flex-wrap">
                         {
                             Dome.map((flower, index) => (
@@ -277,7 +280,7 @@ export default function Body() {
             </div>
             <div ref={flowerBoxes} key='FLOWER BOXES'>
                 <h2><span>FLOWER BOXES</span></h2>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row d-flex flex-wrap">
                         {
                             Boxes.map((flower, index) => (
@@ -289,7 +292,7 @@ export default function Body() {
             </div>
             <div ref={blueToothSpeaker} key='BLUETOOTH SPEAKER'>
                 <h2><span>BLUETOOTH SPEAKER</span></h2>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row d-flex flex-wrap">
                         {
                             Bluetooth.map((flower, index) => (
@@ -301,7 +304,7 @@ export default function Body() {
             </div>
             <div ref={fantasy} key='FANTASY'>
                 <h2><span>FANTASY</span></h2>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row d-flex flex-wrap">
                         {
                             Fantasy.map((flower, index) => (
@@ -313,7 +316,7 @@ export default function Body() {
             </div>
             <div ref={roseBear} key='ROSE BEAR'>
                 <h2><span>ROSE BEAR</span></h2>
-                <div className="container-fluid">
+                <div className="container">
                     <div className="row d-flex flex-wrap">
                         {
                             Bear.map((flower, index) => (

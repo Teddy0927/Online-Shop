@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom';
-import Header from '../Components/Header';
-import Menu from '../Components/Menu';
 
 export default function Register() {
 const { handleSubmit, register } = useForm();
@@ -11,8 +9,6 @@ const navigate = useNavigate();
 
     return (
         <div>
-            <Header />
-            <Menu />
             <div className="container register">
                 <h1>Create Your Account</h1>
                 <h6>Join ai.belief Now</h6>

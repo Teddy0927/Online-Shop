@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { loggedIn } from '../auth/action';
-import Header from '../Components/Header';
-import Menu from '../Components/Menu';
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -16,8 +14,6 @@ export default function Login() {
 
     return (
         <div>
-            <Header />
-            <Menu />
             <div className="container login">
                 <h1>Log In</h1>
                 <div className="justify-content-between d-flex flex-row">

@@ -15,6 +15,21 @@ export class userController {
         this.dbConnection = connectToDatabase();
     }
 
+    // Get account information
+    getAccount = async (req: Request, res: Response) => {
+        const id = req.user?.id;
+        console.log("userRoutes account ", id);
+        // const user = await this.userService.Account(id);
+        // if (user.length === 0) {
+        //     return res.status(404);
+        // }
+
+
+    }
+
+    updateAccount = async (req: Request, res: Response) => {
+
+    }
     // check if inputs include &*:
     // phone / email login
     login = async (req: Request, res: Response) => {
@@ -29,9 +44,11 @@ export class userController {
 
             if (await checkPassword(password, user[0].password)) {
                 console.log('User: ', user[0].username, ' just logged in. With ObjID: ', user[0]._id);
+
+                // const token = jwtSimple.encode(user[0]._id, )
                 return res.json({id: user[0]._id, email: user[0].email, username: user[0].username, token: jwtSimple.encode({
                     userId: user[0]._id
-                }, '1234') });
+                }, process.env.JWT_SECRET!) });
             } else {
                 return res.status(400).json({result: 'wrong_password'});
             }

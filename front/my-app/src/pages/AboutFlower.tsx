@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function notFound() {
+export default function AboutFlower() {
     return (
         <div>
-            <div>404 Not Found</div>
+            About Flower
         </div>
     )
 }

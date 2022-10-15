@@ -12,4 +12,9 @@ export class userService {
         let result = await (await this.dbConnection).collection('users').find({email: email}).toArray();
         return result
     }
+
+    Account = async (id: any) => {
+        let result = await (await this.dbConnection).collection('users').find({_id: id}).toArray();
+        return result 
+    }
 }

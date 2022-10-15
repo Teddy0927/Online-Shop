@@ -4,7 +4,7 @@ import Container from 'react-bootstrap/Container';
 import { NavLink } from 'react-router-dom';
 import logo from '../logoWG.png';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store';
+import { RootState, useAppSelector } from '../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { loggedOut } from '../auth/action';
@@ -14,6 +14,8 @@ import { loggedOut } from '../auth/action';
 export default function Menu() {
     const dispatch = useDispatch();
     const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
+    const cartCount = useAppSelector(state => state.cart.item_ids);
+
     // const loggedUsername = useSelector((state: RootState) => state.auth.username)
 
     return (
@@ -30,27 +32,27 @@ export default function Menu() {
                     </Navbar.Brand>
                     <div className="col-4 row">
                         {!isLoggedIn &&
-                            <NavLink className="col navLinkItem" to="/login">
+                            <NavLink className="col-4 navLinkItem" to="/login">
                                 <FontAwesomeIcon className="icons" icon={solid('user')} />
                                 <h6 className="d-none d-md-block">Login</h6>
                             </NavLink>}
                         {isLoggedIn === true &&
-                            <NavLink className="col navLinkItem" to="/setting">
+                            <NavLink className="col-4 navLinkItem" to="/user">
                                 <FontAwesomeIcon className="icons" icon={solid('user')} />
-                                <h6 className="d-none d-md-block">Hi</h6>
+                                <h6 className="d-none d-md-block">Welcome!</h6>
                                 {/* {loggedUsername} */}
                             </NavLink>
                         }
                         {isLoggedIn === true &&
-                            <a className="col navLinkItem" href="#" onClick={() => {
+                            <a className="col-4 navLinkItem" href="#" onClick={() => {
                                 dispatch(loggedOut());
                             }}>
                                 <FontAwesomeIcon className="icons" icon={solid('right-from-bracket')} />
                                 <h6 className="d-none d-md-block">Log Out</h6></a>
                         }
-                        <NavLink className="col navLinkItem" to="/cart">
+                        <NavLink className="col-4 navLinkItem" to="/cart">
                             <FontAwesomeIcon className="icons" icon={solid('cart-shopping')} />
-                            <h6 className="d-none d-md-block">Cart</h6>
+                            <h6 className="d-none d-md-block">Cart ({cartCount.length})</h6>
                         </NavLink>
                     </div>
                     <div className="w-100"></div>
@@ -60,12 +62,12 @@ export default function Menu() {
                     <Navbar.Collapse className="container-fluid" id="basic-navbar-nav">
                         <div className="container">
                             <ul className="menu row">
-                                <li className="col-sm menuItem"><NavLink to='collection/preservedFlowerBouquet'>PRESERVED FLOWER BOUQUET</NavLink></li>
-                                <li className="col-sm menuItem"><NavLink to='collection/glassDome'>GLASS DOME</NavLink></li>
-                                <li className="col-sm menuItem"><NavLink to='collection/flowerBoxes'>FLOWER BOXES</NavLink></li>
-                                <li className="col-sm menuItem"><NavLink to='collection/bluetoothSpeaker'>BLUETOOTH SPEAKER</NavLink></li>
-                                <li className="col-sm menuItem"><NavLink to='collection/fantasy'>FANTASY</NavLink></li>
-                                <li className="col-sm menuItem"><NavLink to='collection/roseBear'>ROSE BEAR</NavLink></li>
+                                <li className="col-sm menuItem"><NavLink to='collection/1'>PRESERVED FLOWER BOUQUET</NavLink></li>
+                                <li className="col-sm menuItem"><NavLink to='collection/2'>GLASS DOME</NavLink></li>
+                                <li className="col-sm menuItem"><NavLink to='collection/3'>FLOWER BOXES</NavLink></li>
+                                <li className="col-sm menuItem"><NavLink to='collection/4'>BLUETOOTH SPEAKER</NavLink></li>
+                                <li className="col-sm menuItem"><NavLink to='collection/5'>FANTASY</NavLink></li>
+                                <li className="col-sm menuItem"><NavLink to='collection/6'>ROSE BEAR</NavLink></li>
                             </ul>
                         </div>
                     </Navbar.Collapse>
@@ -74,12 +76,12 @@ export default function Menu() {
             <div className="bottom d-none d-lg-block">
                 <div className="container">
                     <ul className="menu row">
-                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/preservedFlowerBouquet'>PRESERVED FLOWER BOUQUET</NavLink></li>
-                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/glassDome'>GLASS DOME</NavLink></li>
-                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/flowerBoxes'>FLOWER BOXES</NavLink></li>
-                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/bluetoothSpeaker'>BLUETOOTH SPEAKER</NavLink></li>
-                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/fantasy'>FANTASY</NavLink></li>
-                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/roseBear'>ROSE BEAR</NavLink></li>
+                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/1'>PRESERVED FLOWER BOUQUET</NavLink></li>
+                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/2'>GLASS DOME</NavLink></li>
+                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/3'>FLOWER BOXES</NavLink></li>
+                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/4'>BLUETOOTH SPEAKER</NavLink></li>
+                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/5'>FANTASY</NavLink></li>
+                        <li className="col-sm menuItem"><NavLink className="navLinkItem" to='collection/6'>ROSE BEAR</NavLink></li>
                     </ul>
                 </div>
             </div>

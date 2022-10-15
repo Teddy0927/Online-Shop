@@ -60,7 +60,6 @@ ul {
   padding: 10px;
   color: #5F7F67;
   border-color: #EBD7BE;
-
 }
 
 .container.login {
@@ -149,7 +148,8 @@ ul {
 }
 
 .slideShow {
-  padding-top: 3vw;
+  margin-top: 3vw;
+  margin-bottom: 3vw;
 }
 
 h2 {
@@ -163,6 +163,7 @@ h2 {
 h2 span { 
    background:#2B2B2B; 
    padding:0 10px; 
+   font-size: auto;
 }
 
 .slidePhoto {
@@ -178,4 +179,43 @@ h2 span {
 .item:hover {
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(5px);
+}
+
+.user {
+ padding-top: 2vw;
+}
+
+.userHeading {
+  text-align: start;
+  margin-inline-start: 2vw;
+}
+
+.userSectionItem {
+  text-decoration: none;
+  border-style: double;
+  height: 50px;
+  transition: 0.3s;
+  font-size: auto;
+  text-align: center;
+  padding: 10px;
+  color: #5F7F67;
+  border-color: #EBD7BE;
+  width: 250px;
+}
+
+.userSectionItem:hover {
+  background-color: #EBD7BE;
+  color: #5F7F67;
+}
+
+.userSectionSlider {
+  margin: 30px;
+  font-size: medium;
+}
+
+.footer {
+  border: #EBD7BE;
+  border-width: 5px;
+  border-style: double;
+  margin-top: 30px;
 }
