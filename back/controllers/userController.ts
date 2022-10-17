@@ -72,7 +72,7 @@ export class userController {
 
         // console.log("userRoutes account ", id);
         try {
-            let id = req.user?.id;
+            const id = req.user?.id;
             const user = await this.userService.GetAccount(id);
 
             if (user) {
@@ -92,9 +92,10 @@ export class userController {
 
     // Update account details
     patchAccount = async (req: Request, res: Response) => {
+        console.log('Enter jor patch but formdata ng work')
         form.parse(req, async (err, fields, files) => {
             try {
-                let id = req.user?.id;
+                const id = req.user?.id;
                 let username = fields.username;
                 let contactNumber = fields.contact_number;
                 let photo = files.photo != null && !Array.isArray(files.photo) ? files.photo.newFilename : null;
@@ -106,6 +107,8 @@ export class userController {
                 let country = fields.country;
                 let result = await this.userService.UpdateAccount(id, username, contactNumber, photo, address1, address2, postalCode, city, state, country)
                 console.log('Entered user controller')
+                console.log('see see yau mo data: ',username)
+                console.log('see see result is what: ', result)
                 result
                     ? res.status(200).send('Successfully updated your account')
                     : res.status(500).send('Failed to update your Account')

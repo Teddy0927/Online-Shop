@@ -22,7 +22,9 @@ export class userService {
 
     UpdateAccount = async (id: ObjectId | undefined, username: string | string[], contactNumber: string | string[], photo: string | null, address1: string | string[], address2: string | string[], postalCode: string | string[], city: string | string[], state: string | string[], country: string | string[]) => {
         console.log('Entered User Service')
-        let result = await (await this.dbConnection).collection('users').updateOne({_id: id}, {$set: {username: username, contactNumber: contactNumber, photo: photo, address1: address1, address2: address2, postalCode: postalCode, city: city, state: state, country: country}})
+        console.log('service ga _id is: ', id)
+        console.log('service ga username is: ', username)
+        let result = await (await this.dbConnection).collection('users').updateOne({_id: new ObjectId(id)}, {$set: {username: username, contactNumber: contactNumber, photo: photo, address1: address1, address2: address2, postalCode: postalCode, city: city, state: state, country: country}})
         return result
     }
 }

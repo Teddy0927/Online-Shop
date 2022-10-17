@@ -53,12 +53,16 @@ export default function UserSetting() {
                 formData.append('address_city', data.city);
                 formData.append('address_state', data.state);
                 formData.append('address_country', data.country);
-                const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/updateAccount`, {
-                    method: 'PATCH',
-                    credentials: 'include',
-                    body: formData
-                });
-                // dispatch(checkResponse(res))
+                // const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/account`, {
+                //     method: 'PATCH',
+                //     credentials: 'include',
+                //     body: formData
+                // });
+                const res = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/account`,
+                    formData
+                )
+                console.log('see see frontend response', res)
+                dispatch(checkResponse(res));
                 if (res.status === 200) {
                     alert('Update Success!');
                     navigate('/user')
@@ -87,7 +91,7 @@ export default function UserSetting() {
                 <input className="settingInput" placeholder="State" {...register('address_state', {required: false})} /><br/>
                 <label className="inputLabel">Country</label><br/>
                 <input className="settingInput" placeholder="Country" {...register('address_country', {required: false})} /><br/>
-                <input className="settingButton" value="Update settings" type="submit"></input>
+                <input className="settingButton" value="Update settings" type="submit" />
             </form>
             <h3>Edit Password</h3>
 
