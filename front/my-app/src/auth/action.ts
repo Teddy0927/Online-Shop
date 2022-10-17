@@ -27,6 +27,7 @@ export type AuthActions = LoggedInAction | LoggedOutAction;
 export function checkResponse(res: AxiosResponse) {
     return (dispatch: AppDispatch) => {
         if (res.headers['temp-token'] != null) {
+            console.log('only axios works: ', res.headers['temp-token']);
             dispatch(login(res.headers['temp-token']))
         }
     }
@@ -36,6 +37,7 @@ export function checkResponse(res: AxiosResponse) {
 export function login(token: string) {
 
     return (dispatch: AppDispatch) => {
+        console.log('front end login token: ',token);
         localStorage.setItem('token', token);
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
@@ -46,7 +48,7 @@ export function login(token: string) {
 }
 
 // export function logout(email: string, username: string, token: string) {
-export function logout(token: string) {
+export function logout() {
 
     return (dispatch: AppDispatch) => {
         localStorage.removeItem('token');
@@ -54,8 +56,6 @@ export function logout(token: string) {
         delete axios.defaults.headers.common['Authorization'];
 
         // dispatch(loggedIn(email, username, token));
-        dispatch(loggedIn(token));
-
-
+        dispatch(loggedOut());
     }
 }

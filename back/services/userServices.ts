@@ -1,5 +1,5 @@
 import { connectToDatabase } from '../testing';
-import { Db } from "mongodb";
+import { Db, ObjectId } from "mongodb";
 
 export class userService {
     private dbConnection: Promise<Db>;
@@ -13,8 +13,16 @@ export class userService {
         return result
     }
 
-    Account = async (id: any) => {
-        let result = await (await this.dbConnection).collection('users').find({_id: id}).toArray();
+    GetAccount = async (id: ObjectId | undefined) => {
+        console.log('account service: ', id);
+        let result = await (await this.dbConnection).collection('users').find({_id: new ObjectId(id)}).toArray();
+        console.log('account result', result)
         return result 
+    }
+
+    UpdateAccount = async (id: ObjectId | undefined, username: string | string[], contactNumber: string | string[], photo: string | null, address1: string | string[], address2: string | string[], postalCode: string | string[], city: string | string[], state: string | string[], country: string | string[]) => {
+        console.log('Entered User Service')
+        let result = await (await this.dbConnection).collection('users').updateOne({_id: id}, {$set: {username: username, contactNumber: contactNumber, photo: photo, address1: address1, address2: address2, postalCode: postalCode, city: city, state: state, country: country}})
+        return result
     }
 }

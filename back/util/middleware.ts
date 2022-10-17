@@ -32,7 +32,7 @@ export const userMiddleware = async (req: express.Request, res: express.Response
         console.log('Enter jor uM try');
         const payload = jwtSimple.decode(token, process.env.JWT_SECRET!)
         req.user = {
-            id: payload.userID
+            id: payload
         };
         
         console.log('req.user try is: ', req.user);

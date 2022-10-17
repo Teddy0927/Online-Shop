@@ -32,7 +32,7 @@ export default function User() {
                         </section>
                     </div>
                     <div className="col-12 col-md-8">
-                        { ShowUserOption === 'User' && <p>Please select your</p>} 
+                        { ShowUserOption === 'User' && <h1>Please select your request</h1>} 
                         { ShowUserOption === 'UserOrder' && <UserOrder />}
                         { ShowUserOption === 'UserSetting' && <UserSetting />}
                     </div>

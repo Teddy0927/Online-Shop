@@ -40,7 +40,7 @@ function App() {
         <Route path='/' element={<Home />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/login' element={<Login />}></Route>
-        <Route path='/user/*' element={<User />}></Route>
+        <Route path='/user' element={<User />}></Route>
         <Route path='/user/setting' element={<UserSetting />}></Route>
         <Route path='/user/order' element={<UserOrder />}></Route>
         <Route path='/collection' element={<Collection />}></Route>

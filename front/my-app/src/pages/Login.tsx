@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { loggedIn } from '../auth/action';
+import { login } from '../auth/action';
+import { useAppDispatch } from '../store';
 
 export default function Login() {
+    const dispatch = useAppDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatch();
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ export default function Login() {
                     if (res.status === 200) {
                         const user = await res.json();
                         // dispatch(loggedIn(user.email, user.username, user.token));
-                        dispatch(loggedIn(user.token));
+                        dispatch(login(user.token));
 
                         navigate('/');
                     } else if (res.status === 400) {

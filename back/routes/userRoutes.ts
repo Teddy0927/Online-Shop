@@ -10,7 +10,6 @@ userRoutes.use(express.json());
 const user = new userService();
 export const UserController = new userController(user);
 // CRUD
-userRoutes.get('/account', userMiddleware, UserController.getAccount);
 // Login
 userRoutes.post('/login', UserController.login);
 // Register account
@@ -18,3 +17,9 @@ userRoutes.post('/register', UserController.register);
 // Update item
 
 // Delete item
+
+// Get account details
+userRoutes.get('/account', userMiddleware, UserController.getAccount);
+
+// Update account details
+userRoutes.patch('/account', userMiddleware, UserController.patchAccount)
