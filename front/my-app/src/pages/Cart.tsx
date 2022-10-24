@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { LoadingState } from '../Components/model';
-// import { loadCart } from '../cart/actions';
+// import { loadCart } from '../cart/action';
 import { loadOneItem } from '../items/action';
 import Skeleton from 'react-loading-skeleton';
 import { useAppDispatch, useAppSelector } from '../store';
@@ -29,21 +29,31 @@ export default function Cart() {
                         !item
                             ? <Skeleton/>
                             : <>
-                                <div className="row">
-                                    <div className="col-3">
+                                <div className="row item">
+                                    <div className="col-4 col-md-4">
                                         <NavLink to={`/item/${item._id}`}>
                                             <img className="cartItemImage"src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${item.photo}`} alt={item.alt}/>
                                         </NavLink>
                                     </div>
-                                    <div className="col-9">
+                                    <div className="col-6 col-md-6 cartText">
                                         <h5>{item.name}</h5>
-                                        <p>{item.style}</p>
                                         <p>{item.alt}</p>
+                                        <p>Style: {item.style}</p>
+                                        <div className="quantityControl">
+                                            <div className="btnMinus" onClick={() => {}}>-</div>
+                                            <input className="quantityInput" type="text" placeholder="1"/>
+                                            <div className="btnPlus">+</div>
+                                        </div>
                                     </div>
+                                    <div className="col-2 col-md-2">
+                                        <div className="cartRemoveButton">Remove</div>
+                                        <div className="cartPrice">HK${item.price}</div>
+                                    </div>
+                                    
 
                                 </div>
                                 
-                                {item.name} {item.price} {item.style} {item.alt}
+                                {/* {item.name} {item.price} {item.style} {item.alt} */}
                             </>
                     }</div>
                 ))

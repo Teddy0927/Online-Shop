@@ -10,7 +10,7 @@ import Collection from './pages/Collection';
 import Cart from './pages/Cart';
 import Test from './pages/Test';
 import { useAppDispatch, useAppSelector } from './store';
-import { loadCart } from './cart/actions';
+import { loadCart } from './cart/action';
 import UserOrder from './Components/UserOrder';
 import User from './pages/User';
 import Header from './Components/Header';

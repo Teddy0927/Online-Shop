@@ -1,5 +1,5 @@
 import React from 'react';
-import { fetchAddToCart } from '../cart/actions';
+import { fetchAddToCart } from '../cart/action';
 import { useAppDispatch } from '../store';
 import { Item } from './model';
 

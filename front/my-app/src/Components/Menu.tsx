@@ -3,16 +3,19 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { NavLink } from 'react-router-dom';
 import logo from '../logoWG.png';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { useAppDispatch } from '../store';
 import { RootState, useAppSelector } from '../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
 import { loggedOut } from '../auth/action';
+import { clearCart } from '../cart/action';
+
 
 
 
 export default function Menu() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
     const cartCount = useAppSelector(state => state.cart.item_ids);
 
@@ -45,6 +48,7 @@ export default function Menu() {
                         }
                         {isLoggedIn === true &&
                             <a className="col-4 navLinkItem" href="#" onClick={() => {
+                                dispatch(clearCart());
                                 dispatch(loggedOut());
                             }}>
                                 <FontAwesomeIcon className="icons" icon={solid('right-from-bracket')} />

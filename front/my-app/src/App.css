@@ -266,3 +266,61 @@ h2 span {
   width: 500px;
   justify-content: center;
 }
+
+.cartText {
+  text-align: left;
+}
+
+.cartRemoveButton {
+  background-color: #000;
+  text-align: center;
+  border-radius: 15px;
+  padding: 4px 12px;
+  position: relative;
+  left: 1rem;
+  min-width: 50px;
+  box-sizing: content-box;
+  cursor: pointer;
+}
+
+.cartPrice {
+  top: 100px;
+  left: 25px;
+  text-align: right;
+  position: relative;
+}
+
+.row.item {
+  border-bottom: 5px double #EBD7BE;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+}
+
+.btnMinus {
+  line-height: 36px;
+  font-size: 21px;
+  display: inline-block;
+  width: 36px;
+  text-align: center;
+  background-color: #5F7F67;
+  border: 0;
+}
+
+.btnPlus {
+  line-height: 36px;
+  font-size: 21px;
+  display: inline-block;
+  width: 36px;
+  text-align: center;
+  background-color: #5F7F67;
+  border: 0;
+}
+
+.quantityInput {
+  text-align: center;
+  width: 36px;
+  line-height: 30px;
+  font-size: 21px;
+  
+}

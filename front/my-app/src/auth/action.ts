@@ -9,17 +9,16 @@ export function loggedIn(token: string) {
         // email: email,
         // username: username,
         token: token,
-    };
+    }
 }
 
 export function loggedOut() {
     return {
         type: '@@auth/LOGGED_OUT' as const,
-    };
+    }
 }
 
 export type LoggedInAction = ReturnType<typeof loggedIn>;
-
 export type LoggedOutAction = ReturnType<typeof loggedOut>;
 
 export type AuthActions = LoggedInAction | LoggedOutAction;
@@ -35,7 +34,6 @@ export function checkResponse(res: AxiosResponse) {
 
 // export function login(email: string, username: string, token: string) {
 export function login(token: string) {
-
     return (dispatch: AppDispatch) => {
         console.log('front end login token: ',token);
         localStorage.setItem('token', token);
@@ -49,8 +47,7 @@ export function login(token: string) {
 
 // export function logout(email: string, username: string, token: string) {
 export function logout() {
-
-    return (dispatch: AppDispatch) => {
+    return async (dispatch: AppDispatch) => {
         localStorage.removeItem('token');
 
         delete axios.defaults.headers.common['Authorization'];
