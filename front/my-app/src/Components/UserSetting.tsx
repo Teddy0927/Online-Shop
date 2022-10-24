@@ -9,8 +9,12 @@ import Menu from './Menu';
 
 export default function UserSetting() {
     const dispatch = useAppDispatch();
-    const [accountDetails, SetAccountDetails] = useState([]);
-    const [errorUpdate, SetErrorUpdate] = useState('');
+    const [accountDetails, setAccountDetails] = useState([]);
+    const [errorUpdate, setErrorUpdate] = useState('');
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorChangePassword, setErrorChangePassword] = useState('');
     const { handleSubmit, register } = useForm();
     const navigate = useNavigate();
 
@@ -20,7 +24,7 @@ export default function UserSetting() {
         const res = await axios.get('/account');
         dispatch(checkResponse(res));
         console.log('account data: ', res.data)
-        SetAccountDetails(res.data);
+        setAccountDetails(res.data);
     }
 
     useEffect(() => {
@@ -53,11 +57,6 @@ export default function UserSetting() {
                 formData.append('address_city', data.city);
                 formData.append('address_state', data.state);
                 formData.append('address_country', data.country);
-                // const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/account`, {
-                //     method: 'PATCH',
-                //     credentials: 'include',
-                //     body: formData
-                // });
                 const res = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/account`,
                     formData
                 )
@@ -67,9 +66,9 @@ export default function UserSetting() {
                     alert('Update Success!');
                     navigate('/user')
                 } else if (res.status === 400) {
-                    SetErrorUpdate('Please try again')
+                    setErrorUpdate('Please try again')
                 } else if (res.status === 404) {
-                    SetErrorUpdate('Not found')
+                    setErrorUpdate('Not found')
                 }
             })}>
                 <h1>{ errorUpdate }</h1>
@@ -94,8 +93,48 @@ export default function UserSetting() {
                 <input className="settingButton" value="Update settings" type="submit" />
             </form>
             <h3>Edit Password</h3>
+            <form onSubmit={async e => {
+                e.preventDefault();
+
+                if (newPassword === confirmPassword) {
+                    const res = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/password`, {
+                        currentPassword: currentPassword,
+                        newPassword: newPassword,
+                        confirmPassword: confirmPassword
+                    });
+                    dispatch(checkResponse(res));
+
+                    if (res.status === 200) {
+                        alert('Change Password Success!')
+                        navigate('/user')
+                    } else if (res.status === 400) {
+                        setErrorChangePassword('Something is wrong. Please try again')
+                    } else if (res.status === 404) {
+                        setErrorChangePassword('Current password is incorrect. Please try again!')
+                    }
+                } else {
+                    alert('New password are not the same as confirm password. Please try again!')
+                }
+            }}>
+                <h1>{errorChangePassword}</h1>
+                <label className="inputLabel">Current Password</label><br />
+                <input className="settingInput" type="password" placeholder="Current Password*" value={currentPassword} onChange={e => setCurrentPassword(e.currentTarget.value)} /><br />
+                <label className="inputLabel">New Password</label><br />
+                <input className="settingInput" type="password" placeholder="New Password*" value={newPassword} onChange={e => setNewPassword(e.currentTarget.value)} /><br />
+                <label className="inputLabel">Confirm Password</label><br />
+                <input className="settingInput" type="password" placeholder="Confirm Password*" value={confirmPassword} onChange={e => setConfirmPassword(e.currentTarget.value)} /><br />
+                <input className="settingButton" value="Update Password" type="submit"/>
+            </form>
 
             <h3>Remove Account</h3>
+            <p>Your profile and all associated order information will be permanently deleted.</p>
+            <p>Please be aware that this action cannot be reversed. Once your account has been deleted, associated username(s), email addresses and data cannot be restored once deleted.</p>
+            <form onSubmit={async e => {
+                e.preventDefault();
+                
+            }}>
+                <input className="settingButton" value="Delete Account" type="submit" />
+            </form>
         </div>
     )
 }

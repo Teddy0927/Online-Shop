@@ -4,6 +4,7 @@ import { LoadingState } from '../Components/model';
 import { loadOneItem } from '../items/action';
 import Skeleton from 'react-loading-skeleton';
 import { useAppDispatch, useAppSelector } from '../store';
+import { NavLink } from 'react-router-dom';
 
 
 export default function Cart() {
@@ -19,7 +20,7 @@ export default function Cart() {
     }, [carts, dispatch])
 
     return (
-        <div>
+        <div className="container cart">
             {
                 cartLoaded !== LoadingState.Loaded
                 ? <Skeleton count={10} />
@@ -28,7 +29,20 @@ export default function Cart() {
                         !item
                             ? <Skeleton/>
                             : <>
-                                <img src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${item.photo}`} alt={item.alt}/>
+                                <div className="row">
+                                    <div className="col-3">
+                                        <NavLink to={`/item/${item._id}`}>
+                                            <img className="cartItemImage"src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${item.photo}`} alt={item.alt}/>
+                                        </NavLink>
+                                    </div>
+                                    <div className="col-9">
+                                        <h5>{item.name}</h5>
+                                        <p>{item.style}</p>
+                                        <p>{item.alt}</p>
+                                    </div>
+
+                                </div>
+                                
                                 {item.name} {item.price} {item.style} {item.alt}
                             </>
                     }</div>

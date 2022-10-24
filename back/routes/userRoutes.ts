@@ -12,14 +12,15 @@ export const UserController = new userController(user);
 // CRUD
 // Login
 userRoutes.post('/login', UserController.login);
+
 // Register account
 userRoutes.post('/register', UserController.register);
-// Update item
-
-// Delete item
 
 // Get account details
 userRoutes.get('/account', userMiddleware, UserController.getAccount);
 
 // Update account details
-userRoutes.patch('/account', userMiddleware, UserController.patchAccount)
+userRoutes.patch('/account', userMiddleware, UserController.patchAccount);
+
+// Change password
+userRoutes.patch('/password', userMiddleware, UserController.patchPassword);

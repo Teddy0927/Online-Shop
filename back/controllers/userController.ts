@@ -3,7 +3,7 @@ import { userService } from '../services/userServices';
 import { logger } from '../util/logger';
 import { form } from '../util/middleware';
 import jwtSimple from 'jwt-simple';
-import { hashPassword, checkPassword  } from '../util/hash';
+import { hashPassword, checkPassword } from '../util/hash';
 import { connectToDatabase } from '../testing';
 import { Db } from 'mongodb';
 
@@ -34,9 +34,9 @@ export class userController {
 
                 const token = jwtSimple.encode((user[0]._id), process.env.JWT_SECRET!)
                 console.log('login token: ', token)
-                return res.json({id: user[0]._id, email: user[0].email, username: user[0].username, token: token });
+                return res.json({ id: user[0]._id, email: user[0].email, username: user[0].username, token: token });
             } else {
-                return res.status(400).json({result: 'wrong_password'});
+                return res.status(400).json({ result: 'wrong_password' });
             }
 
         } catch (err) {
@@ -56,10 +56,10 @@ export class userController {
                 let password = await hashPassword(fields.password as string);
                 let contactNumber = fields.contact_number;
                 let photo = files.photo != null && !Array.isArray(files.photo) ? files.photo.newFilename : null;
-                let result = await (await (this.dbConnection)).collection('users').insertOne({email, username, password, contactNumber, photo});
+                let result = await (await (this.dbConnection)).collection('users').insertOne({ email, username, password, contactNumber, photo });
                 result
                     ? res.status(200).send(`Successfully created account with email ${email}`)
-                    : res.status(500).send('Failed to create a new account')
+                    : res.status(400).send('Failed to create a new account')
             } catch (err) {
                 logger.error(err);
                 res.status(500).json('Internal Server Error');
@@ -92,7 +92,7 @@ export class userController {
 
     // Update account details
     patchAccount = async (req: Request, res: Response) => {
-        console.log('Enter jor patch but formdata ng work')
+        console.log('Enter jor patch but formData ng work')
         form.parse(req, async (err, fields, files) => {
             try {
                 const id = req.user?.id;
@@ -107,15 +107,47 @@ export class userController {
                 let country = fields.country;
                 let result = await this.userService.UpdateAccount(id, username, contactNumber, photo, address1, address2, postalCode, city, state, country)
                 console.log('Entered user controller')
-                console.log('see see yau mo data: ',username)
+                console.log('see see yau mo data: ', username)
                 console.log('see see result is what: ', result)
                 result
                     ? res.status(200).send('Successfully updated your account')
-                    : res.status(500).send('Failed to update your Account')
+                    : res.status(400).send('Failed to update your Account')
             } catch (err) {
                 logger.error(err);
                 res.status(500).json('Internal Server Error');
             }
         })
+    }
+
+    // Change password
+    patchPassword = async (req: Request, res: Response) => {
+        try {
+            const id = req.user?.id;
+            let currentPassword = req.body.currentPassword;
+            let newPassword = req.body.newPassword;
+            let confirmPassword = req.body.confirmPassword;
+
+            if (newPassword === confirmPassword) {
+                const user = await this.userService.GetAccount(id);
+
+                if (await checkPassword(currentPassword, user[0].password)) {
+                    let changedPassword = await hashPassword(confirmPassword)
+                    console.log('new password is: ', changedPassword);
+                    let result = await this.userService.ChangePassword(id, changedPassword);
+    
+                    result
+                        ? res.status(200).send('Successfully changed password.')
+                        : res.status(400).send('Fail to change password.')
+                } else {
+                    res.status(400).send('Incorrect current Password.')
+                }
+            }
+
+
+
+        } catch (err) {
+            logger.error(err);
+            res.status(500).json('Internal Server Error')
+        }
     }
 }

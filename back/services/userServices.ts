@@ -14,9 +14,7 @@ export class userService {
     }
 
     GetAccount = async (id: ObjectId | undefined) => {
-        console.log('account service: ', id);
         let result = await (await this.dbConnection).collection('users').find({_id: new ObjectId(id)}).toArray();
-        console.log('account result', result)
         return result 
     }
 
@@ -26,5 +24,11 @@ export class userService {
         console.log('service ga username is: ', username)
         let result = await (await this.dbConnection).collection('users').updateOne({_id: new ObjectId(id)}, {$set: {username: username, contactNumber: contactNumber, photo: photo, address1: address1, address2: address2, postalCode: postalCode, city: city, state: state, country: country}})
         return result
+    }
+
+    ChangePassword = async (id: ObjectId | undefined, changedPassword: string) => {     
+        let result = await (await this.dbConnection).collection('users').updateOne({_id: new ObjectId(id)}, {$set: {password: changedPassword}})
+        return result
+
     }
 }

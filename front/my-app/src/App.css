@@ -223,7 +223,7 @@ h2 span {
 .settingInput {
   color: #EBD7BE;
   background-color: #2B2B2B;
-  width: 300px;
+  width: 500px;
   height: 50px;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -252,4 +252,17 @@ h2 span {
   border-radius: 25px;
   border-color: #EBD7BE;
   font-size: large;
+}
+
+.cartItemImage {
+  height: 150px;
+  width: 150px;
+  border: #EBD7BE;
+  border-width: 5px;
+  border-style: double;
+}
+
+.container.cart {
+  width: 500px;
+  justify-content: center;
 }
