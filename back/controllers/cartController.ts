@@ -32,10 +32,11 @@ export class cartController {
 
     postCart = async (req: Request, res: Response) => {
         try {
-            let id = req.user?.id;
+            let user_id = req.user?.id;
             let item_id = req.body.item_id
+            let quantity = req.body.quantity
             // const cart = await (await this.dbConnection).collection('cart').insertOne({id, item_id});
-            const cart = await this.cartService.postCart(id, item_id);
+            const cart = await this.cartService.postCart(user_id, item_id, quantity);
             cart
                 ? res.status(201).send(`Successful added a item to cart with id ${cart.insertedId}`)
                 : res.status(500).send('Failed to add a item to cart')

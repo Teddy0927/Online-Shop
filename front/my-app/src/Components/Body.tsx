@@ -14,6 +14,7 @@ import { loggedOut, login } from '../auth/action';
 import { Item, LoadingState } from './model';
 import SellingItems from './Items';
 import { loadFrontItem, loadItems } from '../items/action';
+import { loadCart } from '../cart/action';
 // import { loadFrontItem } from '../items/action';
 
 
@@ -38,6 +39,10 @@ export default function Body() {
         // dispatch(loadFrontItem(6));
 
     }, [dispatch])
+
+    useEffect(() => {
+        dispatch(loadCart());
+      }, [dispatch])
 
 
     const [Bouquet, setBouquet] = useState([]);

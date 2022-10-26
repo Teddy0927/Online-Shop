@@ -48,7 +48,6 @@ export default function Menu() {
                         }
                         {isLoggedIn === true &&
                             <a className="col-4 navLinkItem" href="#" onClick={() => {
-                                dispatch(clearCart());
                                 dispatch(loggedOut());
                             }}>
                                 <FontAwesomeIcon className="icons" icon={solid('right-from-bracket')} />
