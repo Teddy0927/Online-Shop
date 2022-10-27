@@ -12,6 +12,13 @@ export function loadedCart(item_ids: string[]) {
     }
 }
 
+export function loadedCartQuantity(quantity: string) {
+    return {
+        type: '@@cart/LOADED_CART_QUANTITY' as const,
+        quantity
+    }
+}
+
 export function addToCart(item_id: string) {
     return {
         type: '@@cart/ADD_TO_CART' as const,
@@ -47,6 +54,7 @@ export function decreasedQuantity(item_id: string) {
 }
 
 type LoadedCartAction = ReturnType<typeof loadedCart>;
+// type LoadedCartQuantityAction = ReturnType<typeof loadCartQuantity>;
 type AddToCartAction = ReturnType<typeof addToCart>;
 type RemoveToCartAction = ReturnType<typeof removeFromCart>;
 type ClearedCartAction = ReturnType<typeof clearedCart>;
@@ -60,8 +68,16 @@ export function loadCart() {
         const res = await axios.get('/cart')
         // console.log('load cart front data: ',res.data.map((row: any) => [row.item_id, row.quantity.toString()]))
         dispatch(checkResponse(res))
-        // dispatch(loadedCart(res.data.map((row: any) => [row.item_id, row.quantity.toString()])))
-        dispatch(loadedCart(res.data.map((row: any) => row.item_id)))
+        dispatch(loadedCart(res.data.map((row: any) => [row.item_id, row.quantity.toString()])))
+        // dispatch(loadedCart(res.data.map((row: any) => row.item_id)))
+    }
+}
+
+export function loadCartQuantity() {
+    return async (dispatch: AppDispatch) => {
+        const res = await axios.get('/cart')
+        dispatch(checkResponse(res))
+        dispatch(loadedCartQuantity(res.data.map((row:any) => [row.item_id, row.quantity.toString()])))
     }
 }
 
@@ -74,7 +90,7 @@ export function fetchAddToCart(item_id: string) {
                 quantity: 1
             })
             dispatch(checkResponse(res))
-            dispatch(loadCart);
+            dispatch(loadCart());
             alert('Added to cart')
 
         } catch (err) {
@@ -84,14 +100,15 @@ export function fetchAddToCart(item_id: string) {
     }
 }
 
-export function fetchIncreaseQuantity(item_id: string, quantity: number) {
+export function fetchIncreaseQuantity(item_id: string) {
     return async(dispatch: AppDispatch) => {
         dispatch(increasedQuantity(item_id))
         try {
-            const res = await axios.patch('/cartPlus', {
-                item_id: item_id
-            })
-            dispatch(checkResponse(res));
+            // const res = await axios.patch('/cartPlus', {
+            //     item_id: item_id
+            // })
+            // dispatch(checkResponse(res));
+
             dispatch(loadCart());
         } catch (err) {
             dispatch(loadCart());
@@ -99,7 +116,7 @@ export function fetchIncreaseQuantity(item_id: string, quantity: number) {
     }
 }
 
-export function fetchDecreaseQuantity(item_id: string, quantity: number) {
+export function fetchDecreaseQuantity(item_id: string) {
     return async(dispatch: AppDispatch) => {
         dispatch(decreasedQuantity(item_id))
         try {
@@ -119,6 +136,6 @@ export function clearCart() {
         const res = await axios.delete('/cart')
         dispatch(checkResponse(res));
         dispatch(clearedCart());
-        dispatch(loadCart());
+        // dispatch(loadCart());
     }
 }

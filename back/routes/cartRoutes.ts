@@ -12,6 +12,7 @@ export const CartController = new cartController(cart);
 
 // Get cart item
 cartRoutes.get('/cart', userMiddleware, CartController.getCart);
+cartRoutes.get('/cartQuantity/:id', userMiddleware, CartController.getCartQuantity)
 cartRoutes.post('/cart', userMiddleware, CartController.postCart);
 cartRoutes.delete('/cart', userMiddleware, CartController.deleteCart);
 // CRUD

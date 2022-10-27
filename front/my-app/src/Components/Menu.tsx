@@ -8,7 +8,7 @@ import { useAppDispatch } from '../store';
 import { RootState, useAppSelector } from '../store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { solid } from '@fortawesome/fontawesome-svg-core/import.macro';
-import { loggedOut } from '../auth/action';
+import { logout } from '../auth/action';
 import { clearCart } from '../cart/action';
 
 
@@ -48,7 +48,8 @@ export default function Menu() {
                         }
                         {isLoggedIn === true &&
                             <a className="col-4 navLinkItem" href="#" onClick={() => {
-                                dispatch(loggedOut());
+                                dispatch(clearCart());
+                                dispatch(logout());
                             }}>
                                 <FontAwesomeIcon className="icons" icon={solid('right-from-bracket')} />
                                 <h6 className="d-none d-md-block">Log Out</h6></a>

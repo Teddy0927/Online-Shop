@@ -21,6 +21,11 @@ export function cartReducer(state: CartState = initialState, action: CartActions
                 state.item_ids.push(action.item_id)
                 state.item_ids.sort()
             })
+        // case '@@cart/INCREASED_QUANTITY':
+        //     return produce(state, state => {
+        //         const index = state.item_ids.indexOf(action.item_id)
+        //         console.log('increase quantity: ',index)
+        //     })
         case '@@cart/REMOVE_FROM_CART':
             return produce(state, state => {
                 const index = state.item_ids.indexOf(action.item_id)

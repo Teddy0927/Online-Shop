@@ -14,6 +14,12 @@ export class cartService {
         return result
     }
 
+    getCartQuantity = async(user_id: ObjectId | undefined, item_id: string) => {
+        let result = await (await this.dbConnection).collection('cart').find({id: user_id, item_id: item_id}).toArray();
+        console.log(result);
+        return result
+    }
+
     postCart = async (user_id: ObjectId | undefined, item_id: string, quantity: number) => {
         let result = await (await this.dbConnection).collection('cart').insertOne({user_id, item_id, quantity});
         return result

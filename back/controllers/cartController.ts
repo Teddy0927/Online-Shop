@@ -30,6 +30,25 @@ export class cartController {
 
     }
 
+    getCartQuantity = async (req: Request, res: Response) => {
+        const user_id = req.user?.id;
+        console.log('getCartQ user: ', user_id)
+        const item_id = req.params.id;
+        console.log('getCartQ item: ', item_id)
+        try {
+            const cart = await this.cartService.getCartQuantity(user_id, item_id)
+            console.log('get cart quan: ',cart)
+            if (cart) {
+                res.status(200).json(cart[0].quantity);
+            } else {
+                res.json('fail')
+            }
+        } catch (err) {
+            logger.error(err);
+            res.status(500).json('Internal Server Error');
+        }
+    }
+
     postCart = async (req: Request, res: Response) => {
         try {
             let user_id = req.user?.id;

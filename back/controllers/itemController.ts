@@ -74,7 +74,7 @@ export class itemController {
                 res.json({ status: 'fail', result: ['Fail to get items'] })    
             }
         } catch (err) {
-            logger.error(err);
+            logger.error('get One item boom boom: ', err);
             res.status(500).json('Internal Server Error')
         }
     }

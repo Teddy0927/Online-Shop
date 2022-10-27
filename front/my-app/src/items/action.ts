@@ -30,7 +30,7 @@ export type LoadedFrontItemAction = ReturnType<typeof loadedFrontItem>;
 export type ItemsActions = LoadedItemsAction | LoadedOneItemAction | LoadedFrontItemAction;
 
 export function loadItems() {
-    return async(dispatch: AppDispatch) => {
+    return async (dispatch: AppDispatch) => {
         const res = await axios.get(`/collection`)
 
         dispatch(loadedItems(res.data))
@@ -38,10 +38,15 @@ export function loadItems() {
 }
 
 export function loadOneItem(item_id: string) {
-    return async(dispatch: AppDispatch) => {
-        const res = await axios.get(`/item/${item_id}`)
-        console.log('item loadOne action: ', res)
-
+    return async (dispatch: AppDispatch) => {
+        console.log('loadOneItem item_id: ', item_id)
+        let res = await axios.get(`/item/${item_id}`)
+        // console.log('item loadOne action: ', res)
+        const resQuantity = await axios.get(`/cartQuantity/${item_id}`)
+        // let quantity = res.find(cart => cart.item_id === item_id)
+        // console.log('quantity is: ', resQuantity)
+        res.data[0].quantity = resQuantity.data
+        // console.log('item data: ', res.data[0])
         if (res.data.length > 0){
             dispatch(loadedOneItem(res.data[0]))
         }

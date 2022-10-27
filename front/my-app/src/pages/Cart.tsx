@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { LoadingState } from '../Components/model';
-import { clearCart, loadCart } from '../cart/action';
+import { clearCart, fetchDecreaseQuantity, fetchIncreaseQuantity, loadCart } from '../cart/action';
 import { loadOneItem } from '../items/action';
 import Skeleton from 'react-loading-skeleton';
 import { useAppDispatch, useAppSelector } from '../store';
@@ -16,6 +16,7 @@ export default function Cart() {
 
     useEffect(() => {
         for (const cart of carts) {
+            console.log('cart is what: ', cart)
             dispatch(loadOneItem(cart))
         }
     }, [carts, dispatch])
@@ -26,7 +27,7 @@ export default function Cart() {
             {
                 cartLoaded !== LoadingState.Loaded
                 ? <Skeleton count={10} />
-                :   carts.map(cart => items.find(i => i._id.toString() === cart)).map((item, index) => (
+                :   carts.map(cart => items.find(i => i._id.toString() === cart[0])).map((item, index) => (
                     <div key={index}>{
                         !item
                             ? <Skeleton/>
@@ -42,9 +43,9 @@ export default function Cart() {
                                         <p>{item.alt}</p>
                                         <p>Style: {item.style}</p>
                                         <div className="quantityControl">
-                                            <div className="btnMinus" onClick={() => {}}>-</div>
-                                            <input className="quantityInput" type="text"/>
-                                            <div className="btnPlus">+</div>
+                                            <div className="btnMinus" onClick={() => {fetchDecreaseQuantity(item._id)}}>-</div>
+                                            <input className="quantityInput" type="text" value={item.quantity}/>
+                                            <div className="btnPlus" onClick={() => {fetchIncreaseQuantity(item._id)}}>+</div>
                                         </div>
                                     </div>
                                     <div className="col-2 col-md-2">
