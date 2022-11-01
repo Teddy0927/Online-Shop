@@ -7,6 +7,7 @@ import { v4 } from 'uuid';
 import 'dotenv/config';
 
 import fs from 'fs';
+import { ObjectId } from 'mongodb';
 
 
 const permit = new Bearer({
@@ -26,40 +27,42 @@ export const form = formidable({
 
 export const userMiddleware = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
     const token = permit.check(req)
-    // console.log("uM req: ", req)
-    console.log("uM token: ", token)
     try {
-        console.log('Enter jor uM try');
         const payload = jwtSimple.decode(token, process.env.JWT_SECRET!)
         req.user = {
             id: payload
-        };
-        
-        console.log('req.user try is: ', req.user);
+        };        
         next();
     } catch (err) {
-        console.log('uM catch err', err)
-        console.log('Enter jor uM catch');
         const db = connectToDatabase();
         let username = v4();
         let password = "";
         const newUser = (await (await db).collection('users').insertOne({ username, password })).insertedId;
+        
         req.user = {
-            id: newUser
+            id: newUser,
         }
-        console.log('req.user catch is: ', req.user);
         const payload = {
-            userID: newUser
+            newUser
         }
-
-        const jwt = jwtSimple.encode(payload, process.env.JWT_SECRET!);
+        const jwt = jwtSimple.encode(payload['newUser'], process.env.JWT_SECRET!);
         res.header('TEMP-TOKEN', jwt);
 
         next();
     }
-
 }
 
+export const isAdmin = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+    let user_id = req.user?.id;
+    const db = connectToDatabase();
+    const adminCheck = await (await db).collection('users').find({_id: new ObjectId(user_id), role: "admin"}).toArray();
+    if (adminCheck.length === 1) {
+        next()
+    } else {
+        res.json('Unauthorized')
+    }
+    // if (adminCheck.)
+}
 // export const isLogin = (
 //     req: express.Request,
 //     res: express.Response,

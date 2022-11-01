@@ -34,7 +34,7 @@ export class userController {
 
                 const token = jwtSimple.encode((user[0]._id), process.env.JWT_SECRET!)
                 console.log('login token: ', token)
-                return res.json({ id: user[0]._id, email: user[0].email, username: user[0].username, token: token });
+                return res.json({ id: user[0]._id, email: user[0].email, username: user[0].username, token: token, role: user[0].role });
             } else {
                 return res.status(400).json({ result: 'wrong_password' });
             }
@@ -145,6 +145,20 @@ export class userController {
 
 
 
+        } catch (err) {
+            logger.error(err);
+            res.status(500).json('Internal Server Error')
+        }
+    }
+
+    patchAccountAdmin = async (req: Request, res: Response) => {
+        try {
+            let user_id = req.user?.id;
+            let result = await this.userService.PatchAccountAdmin(user_id);
+
+            result
+                ? res.status(200).send('Successfully authorized account')
+                : res.status(400).send('Failed to authorize account')
         } catch (err) {
             logger.error(err);
             res.status(500).json('Internal Server Error')

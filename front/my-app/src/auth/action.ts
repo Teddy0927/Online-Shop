@@ -1,13 +1,10 @@
 import { AppDispatch } from "../store";
 import axios, { AxiosResponse } from 'axios';
 
-// export function loggedIn(email: string, username:string, token: string) {
 export function loggedIn(token: string) {
 
     return {
         type: '@@auth/LOGGED_IN' as const,
-        // email: email,
-        // username: username,
         token: token,
     }
 }
@@ -26,33 +23,27 @@ export type AuthActions = LoggedInAction | LoggedOutAction;
 export function checkResponse(res: AxiosResponse) {
     return (dispatch: AppDispatch) => {
         if (res.headers['temp-token'] != null) {
-            console.log('only axios works: ', res.headers['temp-token']);
             dispatch(login(res.headers['temp-token']))
         }
     }
 }
 
-// export function login(email: string, username: string, token: string) {
 export function login(token: string) {
     return (dispatch: AppDispatch) => {
-        console.log('front end login token: ',token);
         localStorage.setItem('token', token);
 
         axios.defaults.headers.common['Authorization'] = `Bearer ${token}`
 
-        // dispatch(loggedIn(email, username, token));
         dispatch(loggedIn(token));
     }
 }
 
-// export function logout(email: string, username: string, token: string) {
 export function logout() {
     return async (dispatch: AppDispatch) => {
         localStorage.removeItem('token');
 
         delete axios.defaults.headers.common['Authorization'];
 
-        // dispatch(loggedIn(email, username, token));
         dispatch(loggedOut());
     }
 }

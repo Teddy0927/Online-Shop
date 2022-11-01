@@ -1,14 +1,16 @@
 import { LoadingState } from "../Components/model";
 
 export interface Item {
-    alt: string,
-    name: string,
-    style: string,
-    price: string,
-    type: string,
-    photo: string,
     _id: string,
-    quantity: number | undefined
+    item_alt: string,
+    item_name: string,
+    item_style: string,
+    item_price: number,
+    item_category: string,
+    item_photo: string,
+    item_id: string,
+    quantity: number | undefined,
+    user_id: string
 }
 
 export interface ItemState {

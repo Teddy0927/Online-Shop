@@ -1,7 +1,7 @@
 import express from 'express';
 import { userController } from '../controllers/userController';
 import { userService } from '../services/userServices';
-import { userMiddleware } from '../util/middleware';
+import { isAdmin, userMiddleware } from '../util/middleware';
 
 export const userRoutes = express.Router();
 
@@ -24,3 +24,6 @@ userRoutes.patch('/account', userMiddleware, UserController.patchAccount);
 
 // Change password
 userRoutes.patch('/password', userMiddleware, UserController.patchPassword);
+
+// Authorize admin
+userRoutes.patch('/accountAdmin', userMiddleware, isAdmin, UserController.patchAccountAdmin)

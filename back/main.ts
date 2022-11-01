@@ -3,6 +3,7 @@ import express from 'express';
 import { itemRoutes } from './routes/itemRoutes';
 import { userRoutes } from './routes/userRoutes';
 import { cartRoutes } from './routes/cartRoutes';
+import { orderRoutes } from './routes/orderRoutes';
 import { userMiddleware, uploadDir } from './util/middleware';
 import './models';
 import 'dotenv/config';
@@ -33,6 +34,7 @@ app.use('/uploads', express.static(uploadDir));
 app.use(itemRoutes);
 app.use(userRoutes);
 app.use(cartRoutes);
+app.use(orderRoutes);
 
 
 

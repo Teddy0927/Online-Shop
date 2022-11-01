@@ -1,6 +1,6 @@
 import express from 'express';
 
-export const bannerRoutes = express.Router();
+export const promotionRoutes = express.Router();
 
 // CRUD
 

@@ -1,35 +1,26 @@
 import { AppDispatch } from "../store";
 import axios from 'axios';
 import { checkResponse, login } from "../auth/action";
+import { Cart } from "./state";
 
-export function loadedCart(item_ids: string[]) {
-// export function loadedCart(item_ids: {item_id: string, quantity: number}[]) {
-    
-    console.log('loaded cart data: ',item_ids)
+export function loadedCart(carts: Cart[]) {
     return {
         type: '@@cart/LOADED_CART' as const,
-        item_ids
+        carts
     }
 }
 
-export function loadedCartQuantity(quantity: string) {
-    return {
-        type: '@@cart/LOADED_CART_QUANTITY' as const,
-        quantity
-    }
-}
-
-export function addToCart(item_id: string) {
+export function addToCart(cart: Cart) {
     return {
         type: '@@cart/ADD_TO_CART' as const,
-        item_id,
+        cart
     }
 }
 
-export function removeFromCart(item_id: string) {
+export function removeFromCart(_id: string) {
     return {
         type: '@@cart/REMOVE_FROM_CART' as const,
-        item_id
+        _id
     }
 }
 
@@ -39,90 +30,83 @@ export function clearedCart() {
     }
 }
 
-export function increasedQuantity(item_id: string) {
+export function increasedQuantity(_id: string) {
     return {
         type: '@@cart/INCREASED_QUANTITY' as const,
-        item_id,
+        _id,
     }
 }
 
-export function decreasedQuantity(item_id: string) {
+export function decreasedQuantity(_id: string) {
     return {
         type: '@@cart/DECREASED_QUANTITY' as const,
-        item_id,
+        _id,
     }
 }
 
 type LoadedCartAction = ReturnType<typeof loadedCart>;
-// type LoadedCartQuantityAction = ReturnType<typeof loadCartQuantity>;
 type AddToCartAction = ReturnType<typeof addToCart>;
-type RemoveToCartAction = ReturnType<typeof removeFromCart>;
+type RemoveFromCartAction = ReturnType<typeof removeFromCart>;
 type ClearedCartAction = ReturnType<typeof clearedCart>;
 type IncreasedQuantity = ReturnType<typeof increasedQuantity>;
 type DecreasedQuantity = ReturnType<typeof decreasedQuantity>;
 
-export type CartActions = LoadedCartAction | LoadedCartAction | AddToCartAction | RemoveToCartAction | ClearedCartAction | IncreasedQuantity | DecreasedQuantity;
+export type CartActions = LoadedCartAction | AddToCartAction | RemoveFromCartAction | ClearedCartAction | IncreasedQuantity | DecreasedQuantity;
+
 
 export function loadCart() {
     return async (dispatch: AppDispatch) => {
         const res = await axios.get('/cart')
-        // console.log('load cart front data: ',res.data.map((row: any) => [row.item_id, row.quantity.toString()]))
+
         dispatch(checkResponse(res))
-        dispatch(loadedCart(res.data.map((row: any) => [row.item_id, row.quantity.toString()])))
-        // dispatch(loadedCart(res.data.map((row: any) => row.item_id)))
+
+        dispatch(loadedCart(res.data.map((row: any) => row)))
     }
 }
 
-export function loadCartQuantity() {
-    return async (dispatch: AppDispatch) => {
-        const res = await axios.get('/cart')
-        dispatch(checkResponse(res))
-        dispatch(loadedCartQuantity(res.data.map((row:any) => [row.item_id, row.quantity.toString()])))
-    }
-}
-
-export function fetchAddToCart(item_id: string) {
-    return async (dispatch: AppDispatch) => {
-        dispatch(addToCart(item_id))
+export function fetchAddToCart(_id: string, alt: string, name: string, style: string, price: number, category: string, photo: string) {
+    return async (dispatch: AppDispatch) => {         
         try {
             const res = await axios.post('/cart', {
-                item_id: item_id,
-                quantity: 1
+                item_id: _id,
+                item_alt: alt,
+                item_name: name,
+                item_style: style,
+                item_price: price,
+                item_category: category,
+                item_photo: photo,
+                item_quantity: 1,
             })
+            dispatch(addToCart(res.data))
             dispatch(checkResponse(res))
             dispatch(loadCart());
             alert('Added to cart')
 
         } catch (err) {
-            // dispatch(removeFromCart(item_id))
             dispatch(loadCart())
         }
     }
 }
 
-export function fetchIncreaseQuantity(item_id: string) {
-    return async(dispatch: AppDispatch) => {
-        dispatch(increasedQuantity(item_id))
+export function fetchRemoveFromCart(_id: string) {
+    return async (dispatch: AppDispatch) => {
+        dispatch(removeFromCart(_id))
         try {
-            // const res = await axios.patch('/cartPlus', {
-            //     item_id: item_id
-            // })
-            // dispatch(checkResponse(res));
+            const res = await axios.delete(`/cartItem/${_id}`)
+            dispatch(checkResponse(res))
+            dispatch(loadCart());
 
-            dispatch(loadCart());
         } catch (err) {
-            dispatch(loadCart());
+            dispatch(loadCart())
         }
     }
 }
 
-export function fetchDecreaseQuantity(item_id: string) {
+export function fetchIncreaseQuantity(_id: string) {
     return async(dispatch: AppDispatch) => {
-        dispatch(decreasedQuantity(item_id))
+        dispatch(increasedQuantity(_id))
         try {
-            const res = await axios.patch('/cartMinus', {
-                item_id: item_id
-            })
+            const res = await axios.patch(`/cartItemPlus/${_id}`)
             dispatch(checkResponse(res));
             dispatch(loadCart());
         } catch (err) {
@@ -131,11 +115,24 @@ export function fetchDecreaseQuantity(item_id: string) {
     }
 }
 
+export function fetchDecreaseQuantity(_id: string) {
+    return async(dispatch: AppDispatch) => {
+        dispatch(decreasedQuantity(_id))
+        try {
+            const res = await axios.patch(`/cartItemMinus/${_id}`)
+            dispatch(checkResponse(res));
+            dispatch(loadCart());
+        } catch (err) {
+            dispatch(loadCart());
+        }
+    }
+}
+
+
 export function clearCart() {
     return async (dispatch: AppDispatch) => {
-        const res = await axios.delete('/cart')
+        const res = await axios.delete('/clearCart')
         dispatch(checkResponse(res));
         dispatch(clearedCart());
-        // dispatch(loadCart());
     }
 }

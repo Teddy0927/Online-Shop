@@ -38,7 +38,7 @@ const navigate = useNavigate();
                     <input className="registerInput" placeholder="Password*" type='password' {...register('password', {required: true})}></input><br></br>
                     <input className="registerInput" placeholder="Contact Number" {...register('contact_number', {required: false})}></input><br></br>
                     <input className="registerInput" accept=".png, .jpg, .jpeg" type='file' {...register('profile_picture', {required: false})}></input><br></br>
-                    <input className="registerButton" value="Sign up" type='submit'></input>
+                    <input className="registerButton" value="Sign up" type='submit' />
                 </form>
                 <NavLink className="navLinkItem register" to="/login">Already a member?</NavLink>
             </div>

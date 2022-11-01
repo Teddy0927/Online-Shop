@@ -34,8 +34,11 @@ export default function Login() {
                         const user = await res.json();
                         // dispatch(loggedIn(user.email, user.username, user.token));
                         dispatch(login(user.token));
-
+                        if (user.role === 'admin') {
+                            navigate('/admin')
+                        } else {
                         navigate('/');
+                        }
                     } else if (res.status === 400) {
                         setError('Wrong Password');
                     } else if (res.status === 404) {
@@ -44,7 +47,7 @@ export default function Login() {
                 }}>
                     { error }
                     <input className="loginInput" type='text' placeholder='Email*' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" value={email} onChange={e => setEmail(e.currentTarget.value)}></input>
-                    <input className="loginInput" type='text' placeholder='Password*' value={password} onChange={e => setPassword(e.currentTarget.value)}></input>
+                    <input className="loginInput" type='password' placeholder='Password*' value={password} onChange={e => setPassword(e.currentTarget.value)}></input>
                     <input className="loginButton" value='Log In' type='submit'></input>
                 </form>
                 <h6>New to ai.belief?</h6>

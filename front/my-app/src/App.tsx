@@ -9,8 +9,6 @@ import UserSetting from './Components/UserSetting';
 import Collection from './pages/Collection';
 import Cart from './pages/Cart';
 import Test from './pages/Test';
-import { useAppDispatch, useAppSelector } from './store';
-import { loadCart } from './cart/action';
 import UserOrder from './Components/UserOrder';
 import User from './pages/User';
 import Header from './Components/Header';
@@ -22,6 +20,13 @@ import AboutFlower from './pages/AboutFlower';
 import Guide from './pages/Guide';
 import Shipping from './pages/Shipping';
 import Customization from './pages/Customization';
+import CheckOut from './pages/CheckOut';
+import Payment from './pages/Payment';
+import { useAppDispatch, useAppSelector } from './store';
+import { loadCart } from './cart/action';
+import Admin from './pages/Admin';
+import EditItem from './pages/EditItem';
+
 
 function App() {
   // const cartLoaded = useAppSelector(state => state.cart.loading)
@@ -42,9 +47,13 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/user' element={<User />}></Route>
         <Route path='/user/setting' element={<UserSetting />}></Route>
+        <Route path='/admin' element={<Admin />}></Route>
         <Route path='/user/order' element={<UserOrder />}></Route>
         <Route path='/collection' element={<Collection />}></Route>
+        <Route path='/editItem/:id' element={<EditItem />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
+        <Route path='/checkout' element={<CheckOut />}></Route>
+        <Route path='/payment' element={<Payment />}></Route>
         <Route path='/test' element={<Test />}></Route>
         <Route path='/aboutUs' element={<AboutUs />}></Route>
         <Route path='/aboutFlower' element={<AboutFlower />}></Route>

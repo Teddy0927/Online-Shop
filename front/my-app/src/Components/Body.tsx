@@ -23,7 +23,7 @@ export default function Body() {
     const dispatch = useAppDispatch();
     const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
     // const cartLoaded = useAppSelector(state => state.cart.loading);
-    const cartCount = useAppSelector(state => state.cart.item_ids);
+    const cartCount = useAppSelector(state => state.cart.carts);
     const items = useAppSelector(state => state.items.items);
 
     useEffect(() => {

@@ -17,7 +17,7 @@ import { clearCart } from '../cart/action';
 export default function Menu() {
     const dispatch = useAppDispatch();
     const isLoggedIn = useSelector((state: RootState) => state.auth.loggedIn)
-    const cartCount = useAppSelector(state => state.cart.item_ids);
+    const cartCount = useAppSelector(state => state.cart.carts);
 
     // const loggedUsername = useSelector((state: RootState) => state.auth.username)
 
@@ -47,9 +47,9 @@ export default function Menu() {
                             </NavLink>
                         }
                         {isLoggedIn === true &&
-                            <a className="col-4 navLinkItem" href="#" onClick={() => {
-                                dispatch(clearCart());
-                                dispatch(logout());
+                            <a className="col-4 navLinkItem" href="#" onClick={async () => {
+                                await dispatch(clearCart());
+                                await dispatch(logout());
                             }}>
                                 <FontAwesomeIcon className="icons" icon={solid('right-from-bracket')} />
                                 <h6 className="d-none d-md-block">Log Out</h6></a>

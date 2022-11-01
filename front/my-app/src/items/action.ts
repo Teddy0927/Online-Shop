@@ -32,21 +32,14 @@ export type ItemsActions = LoadedItemsAction | LoadedOneItemAction | LoadedFront
 export function loadItems() {
     return async (dispatch: AppDispatch) => {
         const res = await axios.get(`/collection`)
-
-        dispatch(loadedItems(res.data))
+        dispatch(loadedItems(res.data.map((row: any) => row)))
     }
 }
 
-export function loadOneItem(item_id: string) {
+export function loadOneItem(item_id: string, cart_id: string) {
     return async (dispatch: AppDispatch) => {
-        console.log('loadOneItem item_id: ', item_id)
         let res = await axios.get(`/item/${item_id}`)
-        // console.log('item loadOne action: ', res)
-        const resQuantity = await axios.get(`/cartQuantity/${item_id}`)
-        // let quantity = res.find(cart => cart.item_id === item_id)
-        // console.log('quantity is: ', resQuantity)
-        res.data[0].quantity = resQuantity.data
-        // console.log('item data: ', res.data[0])
+        res.data[0].cart_id = cart_id;
         if (res.data.length > 0){
             dispatch(loadedOneItem(res.data[0]))
         }
@@ -55,9 +48,7 @@ export function loadOneItem(item_id: string) {
 
 export function loadFrontItem(type: string) {
     return async(dispatch: AppDispatch) => {
-        // console.log('Type is in here man action: ',type);
         const res = await axios.get(`/collectionFront/${type}`)
-
         dispatch(loadFrontItem(res.data))
     }
 }

@@ -31,4 +31,9 @@ export class userService {
         return result
 
     }
+
+    PatchAccountAdmin = async (user_id: ObjectId | undefined) => {
+        let result = await (await this.dbConnection).collection('users').updateOne({_id: new ObjectId(user_id)}, {$set: {role: 'admin'}})
+        return result
+    }
 }
