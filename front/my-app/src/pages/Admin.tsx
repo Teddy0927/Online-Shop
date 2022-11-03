@@ -9,7 +9,6 @@ import { useAppDispatch } from '../store';
 
 export default function Admin() {
     const dispatch = useAppDispatch();
-
     const [showAdminOption, setShowAdminOption] = useState('');
     
     useEffect(() => {
@@ -21,7 +20,7 @@ export default function Admin() {
             <h1 className="userHeading">Admin</h1>
             <div className="user container-fluid">
                 <div className="row">
-                    <div className="col-12 col-md-4">
+                    <div className="col-12 col-md-3">
                         <section>
                             <div className="d-block d-md-none userSectionSlider">
                                 <Splide options={{arrows: false, pagination: false, gap: 5, padding: {left: 20, right: 20}, fixedWidth: '100px', focus: 'center'}}>
@@ -41,10 +40,10 @@ export default function Admin() {
                             </div>
                         </section>
                     </div>
-                    <div className="col-12 col-md-8">
+                    <div className="col-12 col-md-9">
                         { showAdminOption === 'Admin' && <h1>Please select your request</h1>}
                         { showAdminOption === 'AdminItem' && <AdminItem />}
-                        { showAdminOption === 'UserOrder' && <AdminOrder />}
+                        { showAdminOption === 'AdminOrder' && <AdminOrder />}
                         { showAdminOption === 'AdminSetting' && <AdminSetting />}
                     </div>
                 </div>

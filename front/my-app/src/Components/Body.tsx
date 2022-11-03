@@ -116,59 +116,6 @@ export default function Body() {
     const blueToothSpeaker = useRef(null);
     const fantasy = useRef(null);
     const roseBear = useRef(null);
-    // const flowers1: Item[] = [
-    //     { src: itemDemo, alt: "Preserved rose with pink and pale pink", name: "Preserved Rose1", style: "Brown on top w/ pink and pale pink", price: "HKD 1999" },
-    //     { src: itemDemo, alt: "Preserved rose with red and pale pink", name: "Preserved Rose", style: "Brown on top w/ red and pale pink", price: "HKD 2999" },
-    //     { src: itemDemo, alt: "Preserved rose with blue and pale pink", name: "Preserved Rose", style: "Brown on top w/ blue and pale pink", price: "HKD 1899" },
-    //     { src: itemDemo, alt: "Preserved rose with green and pale pink", name: "Preserved Rose", style: "Brown on top w/ green and pale pink", price: "HKD 3099" },
-    //     { src: itemDemo, alt: "Preserved rose with orange and pale pink", name: "Preserved Rose", style: "Brown on top w/ orange and pale pink", price: "HKD 1199" },
-    //     { src: itemDemo, alt: "Preserved rose with purple and pale pink", name: "Preserved Rose", style: "Brown on top w/ purple and pale pink", price: "HKD 1599" },
-    // ]
-
-    // const flowers2: Item[] = [
-    //     { src: itemDemo, alt: "Preserved rose with pink and pale pink", name: "Preserved Rose2", style: "Brown on top w/ pink and pale pink", price: "HKD 1999" },
-    //     { src: itemDemo, alt: "Preserved rose with red and pale pink", name: "Preserved Rose", style: "Brown on top w/ red and pale pink", price: "HKD 2999" },
-    //     { src: itemDemo, alt: "Preserved rose with blue and pale pink", name: "Preserved Rose", style: "Brown on top w/ blue and pale pink", price: "HKD 1899" },
-    //     { src: itemDemo, alt: "Preserved rose with green and pale pink", name: "Preserved Rose", style: "Brown on top w/ green and pale pink", price: "HKD 3099" },
-    //     { src: itemDemo, alt: "Preserved rose with orange and pale pink", name: "Preserved Rose", style: "Brown on top w/ orange and pale pink", price: "HKD 1199" },
-    //     { src: itemDemo, alt: "Preserved rose with purple and pale pink", name: "Preserved Rose", style: "Brown on top w/ purple and pale pink", price: "HKD 1599" },
-    // ]
-
-    // const flowers3: Item[] = [
-    //     { src: itemDemo, alt: "Preserved rose with pink and pale pink", name: "Preserved Rose3", style: "Brown on top w/ pink and pale pink", price: "HKD 1999" },
-    //     { src: itemDemo, alt: "Preserved rose with red and pale pink", name: "Preserved Rose", style: "Brown on top w/ red and pale pink", price: "HKD 2999" },
-    //     { src: itemDemo, alt: "Preserved rose with blue and pale pink", name: "Preserved Rose", style: "Brown on top w/ blue and pale pink", price: "HKD 1899" },
-    //     { src: itemDemo, alt: "Preserved rose with green and pale pink", name: "Preserved Rose", style: "Brown on top w/ green and pale pink", price: "HKD 3099" },
-    //     { src: itemDemo, alt: "Preserved rose with orange and pale pink", name: "Preserved Rose", style: "Brown on top w/ orange and pale pink", price: "HKD 1199" },
-    //     { src: itemDemo, alt: "Preserved rose with purple and pale pink", name: "Preserved Rose", style: "Brown on top w/ purple and pale pink", price: "HKD 1599" },
-    // ]
-
-    // const flowers4: Item[] = [
-    //     { src: itemDemo, alt: "Preserved rose with pink and pale pink", name: "Preserved Rose4", style: "Brown on top w/ pink and pale pink", price: "HKD 1999" },
-    //     { src: itemDemo, alt: "Preserved rose with red and pale pink", name: "Preserved Rose", style: "Brown on top w/ red and pale pink", price: "HKD 2999" },
-    //     { src: itemDemo, alt: "Preserved rose with blue and pale pink", name: "Preserved Rose", style: "Brown on top w/ blue and pale pink", price: "HKD 1899" },
-    //     { src: itemDemo, alt: "Preserved rose with green and pale pink", name: "Preserved Rose", style: "Brown on top w/ green and pale pink", price: "HKD 3099" },
-    //     { src: itemDemo, alt: "Preserved rose with orange and pale pink", name: "Preserved Rose", style: "Brown on top w/ orange and pale pink", price: "HKD 1199" },
-    //     { src: itemDemo, alt: "Preserved rose with purple and pale pink", name: "Preserved Rose", style: "Brown on top w/ purple and pale pink", price: "HKD 1599" },
-    // ]
-
-    // const flowers5: Item[] = [
-    //     { src: itemDemo, alt: "Preserved rose with pink and pale pink", name: "Preserved Rose5", style: "Brown on top w/ pink and pale pink", price: "HKD 1999" },
-    //     { src: itemDemo, alt: "Preserved rose with red and pale pink", name: "Preserved Rose", style: "Brown on top w/ red and pale pink", price: "HKD 2999" },
-    //     { src: itemDemo, alt: "Preserved rose with blue and pale pink", name: "Preserved Rose", style: "Brown on top w/ blue and pale pink", price: "HKD 1899" },
-    //     { src: itemDemo, alt: "Preserved rose with green and pale pink", name: "Preserved Rose", style: "Brown on top w/ green and pale pink", price: "HKD 3099" },
-    //     { src: itemDemo, alt: "Preserved rose with orange and pale pink", name: "Preserved Rose", style: "Brown on top w/ orange and pale pink", price: "HKD 1199" },
-    //     { src: itemDemo, alt: "Preserved rose with purple and pale pink", name: "Preserved Rose", style: "Brown on top w/ purple and pale pink", price: "HKD 1599" },
-    // ]
-
-    // const flowers6: Item[] = [
-    //     { src: itemDemo, alt: "Preserved rose with pink and pale pink", name: "Preserved Rose6", style: "Brown on top w/ pink and pale pink", price: "HKD 1999" },
-    //     { src: itemDemo, alt: "Preserved rose with red and pale pink", name: "Preserved Rose", style: "Brown on top w/ red and pale pink", price: "HKD 2999" },
-    //     { src: itemDemo, alt: "Preserved rose with blue and pale pink", name: "Preserved Rose", style: "Brown on top w/ blue and pale pink", price: "HKD 1899" },
-    //     { src: itemDemo, alt: "Preserved rose with green and pale pink", name: "Preserved Rose", style: "Brown on top w/ green and pale pink", price: "HKD 3099" },
-    //     { src: itemDemo, alt: "Preserved rose with orange and pale pink", name: "Preserved Rose", style: "Brown on top w/ orange and pale pink", price: "HKD 1199" },
-    //     { src: itemDemo, alt: "Preserved rose with purple and pale pink", name: "Preserved Rose", style: "Brown on top w/ purple and pale pink", price: "HKD 1599" },
-    // ]
 
     const scrollToSection = (elementRef: any) => {
         window.scrollTo({

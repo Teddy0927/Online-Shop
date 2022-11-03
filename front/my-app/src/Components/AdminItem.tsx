@@ -11,8 +11,7 @@ export default function AdminItem() {
             <h1>Admin Item</h1>
             <ul className="menu row">
                 <li className="col-sm menuItem" onClick={() => setShowAdminItemOption('Add')}>Add item</li>
-                <li className="col-sm menuItem" onClick={() => setShowAdminItemOption('Edit')}>Edit Item</li>
-                <li className="col-sm menuItem" onClick={() => setShowAdminItemOption('Delete')}>Delete Item</li>
+                <li className="col-sm menuItem" onClick={() => setShowAdminItemOption('Edit')}>Edit/Delete item</li>
             </ul>
             { showAdminItemOption === 'Add' && <AddItem />}
             { showAdminItemOption === 'Edit' && <AdminEditItem />}            

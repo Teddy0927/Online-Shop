@@ -22,7 +22,6 @@ export const form = formidable({
     keepExtensions: true,
     maxFiles: 1,
     maxFileSize: 200 * 1024 * 1024 ** 2, // the default limit is 200KB,
-    // filter: part => part.mimetype?.startsWith('image/') || false, // for reference (might be hacked)
 })
 
 export const userMiddleware = async (req: express.Request, res: express.Response, next: express.NextFunction) => {
@@ -59,29 +58,6 @@ export const isAdmin = async (req: express.Request, res: express.Response, next:
     if (adminCheck.length === 1) {
         next()
     } else {
-        res.json('Unauthorized')
+        res.status(401).json('Unauthorized')
     }
-    // if (adminCheck.)
 }
-// export const isLogin = (
-//     req: express.Request,
-//     res: express.Response,
-//     next: express.NextFunction
-// ) => {
-//     const token = permit.check(req);
-//     try {
-//         const payload = jwtSimple.decode(token, '1234')
-
-//         if (payload['email']) {
-//             // req.user.email for login required page
-//             req.user = {
-//                 email: payload['email']
-//             }
-//             next();
-//         } else {
-//             res.status(401).json({ result: 'unauthorized' });
-//         }
-//     } catch (err) {
-//         res.status(401).json({result: 'incorrect_token'});
-//     }
-// }

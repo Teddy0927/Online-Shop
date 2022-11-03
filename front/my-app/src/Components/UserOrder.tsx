@@ -9,7 +9,6 @@ export default function UserOrder() {
     const dispatch = useAppDispatch();
     const orderLoaded = useAppSelector(state => state.order.loading);
     const orders = useAppSelector(state => state.order.orders);
-    console.log('order data: ', orders)
 
     useEffect(() => {
         dispatch(loadOrder());

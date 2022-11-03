@@ -1,9 +1,64 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect } from 'react';
+import moment from 'moment';
+import Skeleton from 'react-loading-skeleton';
+import { editOrderStatus, loadOrderAdmin } from '../order/action';
+import { useAppDispatch, useAppSelector } from '../store';
+import { LoadingState } from './model';
 
 export default function AdminOrder() {
+    const dispatch = useAppDispatch();
+    const orders = useAppSelector(state => state.order.orders)
+    const orderLoaded = useAppSelector(state => state.order.loading)
+
+    useEffect(() => {
+        dispatch(loadOrderAdmin())
+    }, [dispatch])
     return (
         <div>
-            Admin Order
+            <h1>Admin Order</h1>
+            <div className="container">
+                <div className="row order">
+                    <div className="col-1">ID</div>
+                    <div className="col-2">Time</div>
+                    <div className="col-2">Address</div>
+                    <div className="col-2">Phone</div>
+                    <div className="col-1">Method</div>
+                    <div className="col-1">Amount</div>
+                    <div className="col-1">Status</div>
+                    <div className="col-1">Action</div>
+                    <div className="col-1">Invoice</div>
+                </div>
+                {
+                    orderLoaded !== LoadingState.Loaded
+                        ? <Skeleton count={5} />
+                        : orders.map((order, index) => (
+                            <div key={index}>{
+                                !orders
+                                    ? <Skeleton />
+                                    : <><div className="row order">
+                                        <div className="col-1">{index + 1}</div>
+                                        <div className="col-2">{moment(order.lastModified).format('MMM DD YYYY')}</div>
+                                        <div className="col-2">{order.city} {order.country}</div>
+                                        <div className="col-2">{order.phoneNumber}</div>
+                                        <div className="col-1">PayMe</div>
+                                        <div className="col-1">HK${order.displayMoney}</div>
+                                        <div className="col-1">{order.status}</div>
+                                        <select className="col-1" onChange={e => dispatch(editOrderStatus(order._id, e.currentTarget.value))}>
+                                            <option>Unsettled</option>
+                                            <option>Pending</option>
+                                            <option>Processing</option>
+                                            <option>Delivered</option>
+                                            <option>Canceled</option>
+                                        </select>
+                                        <div className="col-1">Invoice</div>
+                                    </div>
+                                    </>
+                            }
+                            </div>
+                        ))
+                }
+            </div>
         </div>
     )
 }

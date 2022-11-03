@@ -38,6 +38,18 @@ export class orderController {
         }
     }
 
+    getOrderAdmin = async (req: Request, res: Response) => {
+        try {
+            const order = await this.orderService.getOrderAdmin()
+            order
+            ? res.status(200).json(order)
+            : res.status(400).json('fail')
+        } catch (err) {
+            logger.error(err);
+            res.status(500).send('Internal Server Error')
+        }
+    }
+
     postOrder = async(req: Request, res: Response) => {
         try {
             console.log(req.body);
@@ -55,7 +67,7 @@ export class orderController {
             let carts = req.body.carts;
             let shippingMethod = req.body.shippingMethod;
             let displayMoney = req.body.displayMoney;
-            let status = "Unpaid";
+            let status = "Unsettled";
             // console.log('postOrder id', user_id)
             // console.log('postOrder body', req.body);
             // console.log('postOrder cart: ', req.body.carts)
@@ -77,6 +89,21 @@ export class orderController {
             order
                 ? res.status(200).send(`Successfully make the payment request, Please wait for response`)
                 : res.status(400).send('Failed to make a payment request')
+        } catch (err) {
+            logger.error(err);
+            res.status(500).json('Internal Server Error')
+        }
+    }
+
+    patchOrderStatus = async (req: Request, res: Response) => {
+
+        try {
+            let order_id = req.params.id
+            let status = req.body.status
+            const order = await this.orderService.patchOrderStatus(order_id, status)
+            order
+                ? res.status(200).send(`Successfully update the order status with ObjectId(${order_id})`)
+                : res.status(400).send('Failed to make a payment request');
         } catch (err) {
             logger.error(err);
             res.status(500).json('Internal Server Error')

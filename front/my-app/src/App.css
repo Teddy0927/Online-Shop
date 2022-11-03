@@ -384,3 +384,10 @@ h2 span {
 .paymentGuide {
   margin: 30px;
 }
+
+.row.order {
+  border-bottom: 5px double #EBD7BE;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+}

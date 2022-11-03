@@ -15,8 +15,8 @@ export interface Order {
     state: string,
     carts: Cart[],
     status: string,
-    displayMoney: string
-
+    displayMoney: string,
+    lastModified: Date
 }
 
 export interface OrderState {

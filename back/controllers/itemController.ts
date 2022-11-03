@@ -81,8 +81,6 @@ export class itemController {
 
     createItem = async (req: Request, res: Response) => {
         form.parse(req, async (err, fields, files) => {
-            console.log("data bf try: ")
-
             try {
                 console.log("data: ", fields)
                 let item_alt = fields.item_alt;
@@ -105,19 +103,17 @@ export class itemController {
 
     updateItem = async (req: Request, res: Response) => {
         const id = req.params.id;
-        console.log('enter jor update item')
         form.parse(req, async (err, fields, files) => {
             try {
                 const query = { _id: new ObjectId(id) };
-                console.log('enter jor: query: ', query)
                 let item_alt = fields.item_alt;
                 let item_name = fields.item_name;
                 let item_style = fields.item_style;
                 let item_price = fields.item_price;
                 let item_category = fields.item_category;
                 let item_photo = files.item_photo != null && !Array.isArray(files.item_photo) ? files.item_photo.newFilename : null;
-                console.log('photo: ', item_photo)
                 let result
+
                 if (item_photo != null) {
                     result = await (await (this.dbConnection)).collection('items').updateOne(query, {$set: { item_alt: item_alt, item_name: item_name, item_style: item_style, item_price: item_price, item_category: item_category, item_photo: item_photo }});
                 }else {
@@ -136,7 +132,12 @@ export class itemController {
 
     deleteItem = async (req: Request, res: Response) => {
         try {
-
+            const id = req.params.id;
+            const result = await this.itemService.DeleteItem(id);
+            console.log('delete item: ',result)
+            result
+                ? res.status(200).send(`Successfully removed a item with ObjectId(${id})`)
+                : res.status(400).send(`Failed to remove a item with ObjectId(${id})`)
         } catch (err) {
             logger.error(err);
             res.status(500).json('Internal Server Error');

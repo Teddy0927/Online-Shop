@@ -25,14 +25,24 @@ export default function AddItem() {
                 const res = await axios.post(`/item`, 
                     formData
                 )
+                
                 dispatch(checkResponse(res));
+                // if (res.status === 200) {
+                //     alert('Successfully added item!')
+                //     dispatch(loadItems())
+                // } else if (res.status === 400) {
+                //     setError('Please try again!')
+                // } else if (res.status === 404) {
+                //     setError('Not found')
+                // }
                 if (res.status === 200) {
-                    alert('Successfully added item!')
-                    dispatch(loadItems())
+                    alert('Successfully added item')
                 } else if (res.status === 400) {
-                    setError('Please try again!')
-                } else if (res.status === 404) {
-                    setError('Not found')
+                    alert('Failed to add item')
+                } else if (res.status === 500) {
+                    alert('There is something wrong with the server. Please try again later')
+                } else if (res.status === 401) {
+                    alert('Unauthorize to add item')
                 }
 
             })}>
