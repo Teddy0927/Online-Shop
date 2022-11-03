@@ -20,3 +20,5 @@ orderRoutes.get('/orderAdmin', userMiddleware, isAdmin, OrderController.getOrder
 orderRoutes.post('/order', userMiddleware, OrderController.postOrder)
 // Patch order (admin)
 orderRoutes.patch('/orderStatus/:id', userMiddleware, isAdmin, OrderController.patchOrderStatus)
+
+orderRoutes.get('/orderPayment/:id', OrderController.getOrderPayment)

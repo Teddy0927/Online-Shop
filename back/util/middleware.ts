@@ -5,6 +5,7 @@ import formidable from 'formidable';
 import { connectToDatabase } from '../testing';
 import { v4 } from 'uuid';
 import 'dotenv/config';
+import nodemailer from 'nodemailer';
 
 import fs from 'fs';
 import { ObjectId } from 'mongodb';
@@ -61,3 +62,13 @@ export const isAdmin = async (req: express.Request, res: express.Response, next:
         res.status(401).json('Unauthorized')
     }
 }
+
+export const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port : 587,
+    secure: false,
+    auth: {
+        user: process.env.NODEMAILER_EMAIL,
+        pass: process.env.NODEMAILER_PASSWORD
+    }
+})

@@ -16,6 +16,7 @@ export interface Order {
     carts: Cart[],
     status: string,
     displayMoney: string,
+    created_at: Date,
     lastModified: Date
 }
 

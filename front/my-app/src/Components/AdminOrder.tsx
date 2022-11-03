@@ -38,7 +38,7 @@ export default function AdminOrder() {
                                     ? <Skeleton />
                                     : <><div className="row order">
                                         <div className="col-1">{index + 1}</div>
-                                        <div className="col-2">{moment(order.lastModified).format('MMM DD YYYY')}</div>
+                                        <div className="col-2">{moment(order.created_at).format('MMM DD YYYY')}</div>
                                         <div className="col-2">{order.city} {order.country}</div>
                                         <div className="col-2">{order.phoneNumber}</div>
                                         <div className="col-1">PayMe</div>

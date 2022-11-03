@@ -66,9 +66,7 @@ export default function CheckOut() {
 
                         if (res.status === 200) {
                             alert('Order placed, please proceed to payment')
-                            console.log('checkout result: ',res);
-                            navigate('/payment');
-                            // await dispatch(clearCart());
+                            navigate(`/payment/${res.data.insertedId}`);
                         } else if (res.status === 400) {
                             setCheckoutError('Please try again')
                         } else if (res.status === 404) {

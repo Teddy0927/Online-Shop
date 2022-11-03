@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { checkResponse } from '../auth/action';
-import { loadOrder, loadOrderLatest, payOrder } from '../order/action';
+import { loadOrder, loadOrderLatest, loadOrderPayment, payOrder } from '../order/action';
 import { useAppDispatch, useAppSelector } from '../store';
 import { LoadingState } from '../Components/model';
 import Skeleton from 'react-loading-skeleton';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 export default function Payment() {
+    const { id } = useParams();
     const dispatch = useAppDispatch();
     const orderLoaded = useAppSelector(state => state.order.loading)
     const orders = useAppSelector(state => state.order.orders)
-    // let total: number;
-    // let subtotal;
-    // const [displayMoney, setDisplayMoney] = useState('')
 
     useEffect(() => {
-        dispatch(loadOrderLatest())
+        dispatch(loadOrderPayment(id))
     }, [dispatch])
 
     return (

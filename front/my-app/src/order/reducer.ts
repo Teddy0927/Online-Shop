@@ -22,6 +22,12 @@ export function orderReducer(state: OrderState = initialState, action: OrderActi
                 loading: LoadingState.Loaded,
                 orders: action.orders
             }
+        case '@@order/LOADED_ORDER_PAYMENT':
+            return {
+                ...state,
+                loading: LoadingState.Loaded,
+                orders: action.orders
+            }
         case '@@order/LOADED_ORDER_ADMIN':
             return {
                 ...state,
