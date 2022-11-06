@@ -208,7 +208,7 @@ export default function Body() {
             </div>
             <div ref={preservedFlowerBouquet} key='PRESERVED FLOWER BOUQUET'>
                 <h2><span>BOUQUET</span></h2>
-                <div className="container">
+                <div className="container p-3">
                     <div className="row d-flex flex-wrap justify-content-around">
                         {
                             Bouquet.map((flower, index) => (
@@ -220,8 +220,8 @@ export default function Body() {
             </div>
             <div ref={glassDome} key='GLASS DOME'>
                 <h2><span>GLASS DOME</span></h2>
-                <div className="container">
-                    <div className="row d-flex flex-wrap">
+                <div className="container p-3">
+                    <div className="row d-flex flex-wrap justify-content-around">
                         {
                             Dome.map((flower, index) => (
                                 <SellingItems item={flower} key={index} />
@@ -232,8 +232,8 @@ export default function Body() {
             </div>
             <div ref={flowerBoxes} key='FLOWER BOXES'>
                 <h2><span>FLOWER BOXES</span></h2>
-                <div className="container">
-                    <div className="row d-flex flex-wrap">
+                <div className="container p-3">
+                    <div className="row d-flex flex-wrap justify-content-around">
                         {
                             Boxes.map((flower, index) => (
                                 <SellingItems item={flower} key={index} />
@@ -244,8 +244,8 @@ export default function Body() {
             </div>
             <div ref={blueToothSpeaker} key='BLUETOOTH SPEAKER'>
                 <h2><span>BLUETOOTH SPEAKER</span></h2>
-                <div className="container">
-                    <div className="row d-flex flex-wrap">
+                <div className="container p-3">
+                    <div className="row d-flex flex-wrap justify-content-around">
                         {
                             Bluetooth.map((flower, index) => (
                                 <SellingItems item={flower} key={index} />
@@ -256,8 +256,8 @@ export default function Body() {
             </div>
             <div ref={fantasy} key='FANTASY'>
                 <h2><span>FANTASY</span></h2>
-                <div className="container">
-                    <div className="row d-flex flex-wrap">
+                <div className="container p-3">
+                    <div className="row d-flex flex-wrap justify-content-around">
                         {
                             Fantasy.map((flower, index) => (
                                 <SellingItems item={flower} key={index} />
@@ -268,8 +268,8 @@ export default function Body() {
             </div>
             <div ref={roseBear} key='ROSE BEAR'>
                 <h2><span>ROSE BEAR</span></h2>
-                <div className="container">
-                    <div className="row d-flex flex-wrap">
+                <div className="container p-3">
+                    <div className="row d-flex flex-wrap justify-content-around">
                         {
                             Bear.map((flower, index) => (
                                 <SellingItems item={flower} key={index} />

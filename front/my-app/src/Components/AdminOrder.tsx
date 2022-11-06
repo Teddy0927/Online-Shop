@@ -5,9 +5,11 @@ import Skeleton from 'react-loading-skeleton';
 import { editOrderStatus, loadOrderAdmin } from '../order/action';
 import { useAppDispatch, useAppSelector } from '../store';
 import { LoadingState } from './model';
+import { useNavigate } from 'react-router-dom';
 
 export default function AdminOrder() {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const orders = useAppSelector(state => state.order.orders)
     const orderLoaded = useAppSelector(state => state.order.loading)
 
@@ -17,7 +19,7 @@ export default function AdminOrder() {
     return (
         <div>
             <h1>Admin Order</h1>
-            <div className="container">
+            <div className="container-fluid">
                 <div className="row order">
                     <div className="col-1">ID</div>
                     <div className="col-2">Time</div>
@@ -27,7 +29,7 @@ export default function AdminOrder() {
                     <div className="col-1">Amount</div>
                     <div className="col-1">Status</div>
                     <div className="col-1">Action</div>
-                    <div className="col-1">Invoice</div>
+                    <div className="col-1">Details</div>
                 </div>
                 {
                     orderLoaded !== LoadingState.Loaded
@@ -51,7 +53,11 @@ export default function AdminOrder() {
                                             <option>Delivered</option>
                                             <option>Canceled</option>
                                         </select>
-                                        <div className="col-1">Invoice</div>
+                                        <button onClick={() => navigate('/')}className="col-1">More</button>
+                                        <div className="col-4">
+                                            Payment Confirmation photo
+                                            <img className="paymentPhoto" src={`${process.env.REACT_APP_BACKEND_URL}/uploads/${order.payment_verify_photo}`} alt={order._id} />
+                                        </div>
                                     </div>
                                     </>
                             }

@@ -1456,7 +1456,7 @@
   dependencies:
     "@humanwhocodes/object-schema" "^1.2.1"
     debug "^4.1.1"
-    minimatch "^3.0.5"
+    minimatch "^3.0.4"
 
 "@humanwhocodes/gitignore-to-minimatch@^1.0.2":
   version "1.0.2"
@@ -3155,13 +3155,14 @@ axe-core@^4.4.3:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.4.3.tgz#11c74d23d5013c0fa5d183796729bc3482bd2f6f"
   integrity sha512-32+ub6kkdhhWick/UjvEwRchgoetXqTK14INLqbGm5U2TzBkBNF3nQtLYm8ovxSkQWArjEQvftCKryjZaATu3w==
 
-axios@^0.27.2:
-  version "0.27.2"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.27.2.tgz#207658cc8621606e586c85db4b41a750e756d972"
-  integrity sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==
+axios@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.1.3.tgz#8274250dada2edf53814ed7db644b9c2866c1e35"
+  integrity sha512-00tXVRwKx/FZr/IDVFt4C+f9FYairX517WoGCL6dpOntqLkZofjhu43F/Xl44UOpqa+9sLFDrG/XAnFsUYgkDA==
   dependencies:
-    follow-redirects "^1.14.9"
+    follow-redirects "^1.15.0"
     form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
 
 axobject-query@^2.2.0:
   version "2.2.0"
@@ -3902,7 +3903,7 @@ css-select@^2.0.0:
     boolbase "^1.0.0"
     css-what "^3.2.1"
     domutils "^1.7.0"
-    nth-check "^2.0.1"
+    nth-check "^1.0.2"
 
 css-select@^4.1.3:
   version "4.3.0"
@@ -4985,7 +4986,7 @@ follow-redirects@^1.0.0:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.1.tgz#0ca6a452306c9b276e4d3127483e29575e207ad5"
   integrity sha512-yLAMQs+k0b2m7cVxpS1VKJVvoz7SS9Td1zss3XRwXj+ZDH00RJgnuLx7E44wx02kQLrdM3aOOy+FpzS7+8OizA==
 
-follow-redirects@^1.14.9:
+follow-redirects@^1.15.0:
   version "1.15.2"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.2.tgz#b460864144ba63f2681096f274c4e57026da2c13"
   integrity sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==
@@ -5004,7 +5005,7 @@ fork-ts-checker-webpack-plugin@^6.5.0:
     fs-extra "^9.0.0"
     glob "^7.1.6"
     memfs "^3.1.2"
-    minimatch "^3.0.5"
+    minimatch "^3.0.4"
     schema-utils "2.7.0"
     semver "^7.3.2"
     tapable "^1.0.0"
@@ -5782,7 +5783,7 @@ jake@^10.8.5:
     async "^3.2.3"
     chalk "^4.0.2"
     filelist "^1.0.1"
-    minimatch "^3.0.5"
+    minimatch "^3.0.4"
 
 jest-changed-files@^27.5.1:
   version "27.5.1"
@@ -7012,8 +7013,14 @@ minimalistic-assert@^1.0.0:
   resolved "https://registry.yarnpkg.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz#2e194de044626d4a10e7f7fbc00ce73e83e4d5c7"
   integrity sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==
 
+minimatch@3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
+  integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
+  dependencies:
+    brace-expansion "^1.1.7"
 
-minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
+minimatch@^3.0.4, minimatch@^3.0.5, minimatch@^3.1.1, minimatch@^3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
@@ -7132,8 +7139,8 @@ npm-run-path@^4.0.1:
   dependencies:
     path-key "^3.0.0"
 
-nth-check@^2.0.1:
-  version "2.0.1"
+nth-check@^1.0.2:
+  version "1.0.2"
   resolved "https://registry.yarnpkg.com/nth-check/-/nth-check-1.0.2.tgz#b2bd295c37e3dd58a3bf0700376663ba4d9cf05c"
   integrity sha512-WeBOdju8SnzPN5vTUJYxYUxLeXpCaVP5i5e0LF8fg7WORF2Wd7wFX/pk0tYZk7s8T+J7VLy0Da6J1+wCT0AtHg==
   dependencies:
@@ -8108,6 +8115,11 @@ proxy-addr@~2.0.7:
     forwarded "0.2.0"
     ipaddr.js "1.9.1"
 
+proxy-from-env@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
+  integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
+
 psl@^1.1.33:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/psl/-/psl-1.9.0.tgz#d0df2a137f00794565fcaf3b2c00cd09f8d5a5a7"
@@ -8439,7 +8451,7 @@ recursive-readdir@^2.2.2:
   resolved "https://registry.yarnpkg.com/recursive-readdir/-/recursive-readdir-2.2.2.tgz#9946fb3274e1628de6e36b2f6714953b4845094f"
   integrity sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
   dependencies:
-    minimatch "3.0.5"
+    minimatch "3.0.4"
 
 redent@^3.0.0:
   version "3.0.0"
@@ -9321,7 +9333,7 @@ test-exclude@^6.0.0:
   dependencies:
     "@istanbuljs/schema" "^0.1.2"
     glob "^7.1.4"
-    minimatch "^3.0.5"
+    minimatch "^3.0.4"
 
 text-table@^0.2.0:
   version "0.2.0"

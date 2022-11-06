@@ -31,9 +31,7 @@ export class userController {
 
             if (await checkPassword(password, user[0].password)) {
                 console.log('User: ', user[0].username, ' just logged in. With ObjID: ', user[0]._id);
-
                 const token = jwtSimple.encode((user[0]._id), process.env.JWT_SECRET!)
-                console.log('login token: ', token)
                 return res.json({ id: user[0]._id, email: user[0].email, username: user[0].username, token: token, role: user[0].role });
             } else {
                 return res.status(400).json({ result: 'wrong_password' });
@@ -69,14 +67,11 @@ export class userController {
 
     // Get account information
     getAccount = async (req: Request, res: Response) => {
-
-        // console.log("userRoutes account ", id);
         try {
             const id = req.user?.id;
             const user = await this.userService.GetAccount(id);
 
             if (user) {
-                // console.log(user);
                 res.status(200).json(user);
             } else {
                 res.status(400).json('fail')
@@ -92,7 +87,6 @@ export class userController {
 
     // Update account details
     patchAccount = async (req: Request, res: Response) => {
-        console.log('Enter jor patch but formData ng work')
         form.parse(req, async (err, fields, files) => {
             try {
                 const id = req.user?.id;
@@ -106,9 +100,6 @@ export class userController {
                 let state = fields.state;
                 let country = fields.country;
                 let result = await this.userService.UpdateAccount(id, username, contactNumber, photo, address1, address2, postalCode, city, state, country)
-                console.log('Entered user controller')
-                console.log('see see yau mo data: ', username)
-                console.log('see see result is what: ', result)
                 result
                     ? res.status(200).send('Successfully updated your account')
                     : res.status(400).send('Failed to update your Account')
@@ -132,7 +123,6 @@ export class userController {
 
                 if (await checkPassword(currentPassword, user[0].password)) {
                     let changedPassword = await hashPassword(confirmPassword)
-                    console.log('new password is: ', changedPassword);
                     let result = await this.userService.ChangePassword(id, changedPassword);
     
                     result

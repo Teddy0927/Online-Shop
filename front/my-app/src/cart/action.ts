@@ -56,7 +56,7 @@ export type CartActions = LoadedCartAction | AddToCartAction | RemoveFromCartAct
 
 export function loadCart() {
     return async (dispatch: AppDispatch) => {
-        const res = await axios.get('/cart')
+        const res = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/cart`)
 
         dispatch(checkResponse(res))
 
