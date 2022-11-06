@@ -31,7 +31,7 @@ export class itemController {
     getItemsByCol = async (req:Request, res: Response) => {
         try {
             const id = req.params.id;
-            const result = await (await this.dbConnection).collection('items').find({type: {$eq: id}}).toArray();
+            const result = await (await this.dbConnection).collection('items').find({item_category: id}).toArray();
 
             if (result) {
                 res.status(200).json(result);

@@ -6,7 +6,9 @@ import * as mongoDB from "mongodb";
 export async function connectToDatabase () {
 
     // const uri = "mongodb://root:example@127.0.0.1:27017";
-    const uri = "mongodb://127.0.0.1:27017";
+    // const uri = "mongodb://127.0.0.1:27017";
+    const uri = "mongodb://root:example@mongo:27017";
+
 
     const client: mongoDB.MongoClient = new mongoDB.MongoClient(uri);
             
@@ -18,20 +20,4 @@ export async function connectToDatabase () {
 
     return db;
    
-    // const coll: mongoDB.Collection = db.collection("demo");
-
-    // await coll.insertMany([
-    //     {
-    //         abc: 123
-    //     },
-    //     {
-    //         xyz: "hello!"
-    //     }
-    // ])
-
-    // console.log(await coll.find({}).toArray());
- 
 };
-
-// connectToDatabase();
-

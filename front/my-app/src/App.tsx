@@ -49,7 +49,7 @@ function App() {
         <Route path='/user/setting' element={<UserSetting />}></Route>
         <Route path='/admin' element={<Admin />}></Route>
         <Route path='/user/order' element={<UserOrder />}></Route>
-        <Route path='/collection' element={<Collection />}></Route>
+        <Route path='/collection/:id' element={<Collection />}></Route>
         <Route path='/editItem/:id' element={<EditItem />}></Route>
         <Route path='/cart' element={<Cart />}></Route>
         <Route path='/checkout' element={<CheckOut />}></Route>

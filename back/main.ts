@@ -43,6 +43,6 @@ app.use(orderRoutes);
 app.use(userMiddleware, express.static('private'))
 
 // Use port
-app.listen(8000, function () {
+app.listen(process.env.PORT, function () {
     console.log('Listening on port 8000')
 });

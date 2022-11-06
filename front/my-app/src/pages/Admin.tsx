@@ -27,7 +27,7 @@ export default function Admin() {
                                     <SplideSlide onClick={() => setShowAdminOption('Admin')}>Admin</SplideSlide>
                                     <SplideSlide onClick={() => setShowAdminOption('AdminItem')}>Item</SplideSlide>
                                     <SplideSlide onClick={() => setShowAdminOption('AdminOrder')}>Order</SplideSlide>
-                                    <SplideSlide onClick={() => setShowAdminOption('AdminSetting')}>Settings</SplideSlide>
+                                    {/* <SplideSlide onClick={() => setShowAdminOption('AdminSetting')}>Settings</SplideSlide> */}
                                     <SplideSlide onClick={() => dispatch(loggedOut())}>Log out</SplideSlide>
                                 </Splide>
                             </div>
@@ -35,7 +35,7 @@ export default function Admin() {
                                 <div className="userSectionItem" onClick={() => setShowAdminOption('Admin')}>Admin</div>
                                 <div className="userSectionItem" onClick={() => setShowAdminOption('AdminItem')}>Item</div>
                                 <div className="userSectionItem" onClick={() => setShowAdminOption('AdminOrder')}>Order</div>
-                                <div className="userSectionItem" onClick={() => setShowAdminOption('AdminSetting')}>Setting</div>
+                                {/* <div className="userSectionItem" onClick={() => setShowAdminOption('AdminSetting')}>Setting</div> */}
                                 <div className="userSectionItem" onClick={() => dispatch(loggedOut())}>Log out</div>
                             </div>
                         </section>
@@ -44,7 +44,7 @@ export default function Admin() {
                         { showAdminOption === 'Admin' && <h1>Please select your request</h1>}
                         { showAdminOption === 'AdminItem' && <AdminItem />}
                         { showAdminOption === 'AdminOrder' && <AdminOrder />}
-                        { showAdminOption === 'AdminSetting' && <AdminSetting />}
+                        {/* { showAdminOption === 'AdminSetting' && <AdminSetting />} */}
                     </div>
                 </div>
             </div>

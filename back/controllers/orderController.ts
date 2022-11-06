@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { orderService } from '../services/orderServices';
 import { logger } from '../util/logger';
-import { transporter } from '../util/middleware';
+import { form, transporter } from '../util/middleware';
 
 export class orderController {
     constructor(
@@ -103,16 +103,21 @@ export class orderController {
     }
 
     patchPayOrder = async (req: Request, res: Response) => {
-        try {
-            let order_id = req.params.id
-            const order = await this.orderService.patchPayOrder(order_id)
-            order
-                ? res.status(200).send(`Successfully make the payment request, Please wait for response`)
-                : res.status(400).send('Failed to make a payment request')
-        } catch (err) {
-            logger.error(err);
-            res.status(500).json('Internal Server Error')
-        }
+        form.parse(req, async (err, fields, files) => {
+            try {
+                let order_id = req.params.id
+                console.log('patch photo: ', files)
+                let payment_verify_photo = files.payment_verify_photo != null && !Array.isArray(files.payment_verify_photo) ? files.payment_verify_photo.newFilename : null;
+                const order = await this.orderService.patchPayOrder(order_id, payment_verify_photo)
+                order
+                    ? res.status(200).send(`Successfully make the payment request, Please wait for response`)
+                    : res.status(400).send('Failed to make a payment request')
+            } catch (err) {
+                logger.error(err);
+                res.status(500).json('Internal Server Error')
+            }
+        })
+
     }
 
     patchOrderStatus = async (req: Request, res: Response) => {

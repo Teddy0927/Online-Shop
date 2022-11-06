@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect} from 'react';
 import axios from 'axios';
-import { checkResponse } from '../auth/action';
-import { loadOrder, loadOrderLatest, loadOrderPayment, payOrder } from '../order/action';
+import { loadOrderPayment} from '../order/action';
 import { useAppDispatch, useAppSelector } from '../store';
 import { LoadingState } from '../Components/model';
 import Skeleton from 'react-loading-skeleton';
 import { NavLink, useParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
 
 export default function Payment() {
+    const { handleSubmit, register } = useForm();
     const { id } = useParams();
     const dispatch = useAppDispatch();
     const orderLoaded = useAppSelector(state => state.order.loading)
@@ -15,7 +16,7 @@ export default function Payment() {
 
     useEffect(() => {
         dispatch(loadOrderPayment(id))
-    }, [dispatch])
+    }, [dispatch, id])
 
     return (
         <div className="container-fluid">
@@ -64,7 +65,24 @@ export default function Payment() {
                                             <h3>Total: HK${order.displayMoney}</h3>
                                         </div>
                                     </div>
-                                    <button className="checkoutButton" onClick={() => dispatch(payOrder(order._id))}>Paid!</button>
+                                    <form onSubmit={handleSubmit(async data => {
+                                        const formData = new FormData();
+                                        formData.append('payment_verify_photo', data.payment_verify_photo[0]);
+                                        const res = await axios.patch(`${process.env.REACT_APP_BACKEND_URL}/payOrder/${order._id}`,
+                                        formData)
+                                        if (res.status === 200) {
+                                            alert('Sent request customer service.')
+                                            dispatch(loadOrderPayment(id))
+                                        } else if (res.status === 400) {
+                                            alert('Request not success. Please try again')
+                                        } else if (res.status === 500) {
+                                            alert('There is something wrong with the server. Please try again!')
+                                        }
+                                    })}>
+                                        <label className="inputLabel">Payment verifying photo</label><br/>
+                                        <input className="settingInput" accept=".png, .jpg, .jpeg" type="file" {...register('payment_verify_photo', {required: true})} /><br/>
+                                        <input className="checkoutButton" value="Paid!" type="submit" />
+                                    </form>
                                 </>
                         }
                         </div>

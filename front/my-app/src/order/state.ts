@@ -17,7 +17,8 @@ export interface Order {
     status: string,
     displayMoney: string,
     created_at: Date,
-    lastModified: Date
+    lastModified: Date,
+    payment_verify_photo: string
 }
 
 export interface OrderState {

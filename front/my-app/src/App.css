@@ -391,3 +391,12 @@ h2 span {
   padding-bottom: 30px;
 
 }
+
+.paymentPhoto {
+  max-height: 300px;
+  width: auto;
+}
+
+.container.aboutUs {
+  margin: 50px
+}

@@ -35,8 +35,8 @@ export class orderService {
         return result
     }
 
-    patchPayOrder = async (order_id: string) => {
-        let result = await (await this.dbConnection).collection('order').updateOne({_id: new ObjectId(order_id)}, {$set: {status: 'Pending', lastModified: new Date()}})
+    patchPayOrder = async (order_id: string, payment_verify_photo: string | null) => {
+        let result = await (await this.dbConnection).collection('order').updateOne({_id: new ObjectId(order_id)}, {$set: {status: 'Pending', payment_verify_photo: payment_verify_photo, lastModified: new Date()}})
         return result
     }
 

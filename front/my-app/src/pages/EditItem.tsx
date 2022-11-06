@@ -26,7 +26,7 @@ export default function EditItem() {
         if (id) {
             getItemInfo(id)
         } 
-    }, [id, reset])
+    }, [reset, id])
 
     async function getItemInfo(id: string) {
         const res = await axios.get(`/item/${id}`)
